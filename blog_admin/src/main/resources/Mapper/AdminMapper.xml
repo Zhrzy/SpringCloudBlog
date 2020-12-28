@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="com.zy.blog.entity.Admin">
+<mapper namespace="com.zy.blog.admin.mapper.AdminMapper">
 
-    <insert id="create" parameterType="Payment" useGeneratedKeys="true" keyProperty="id">
+   <!-- <insert id="create" parameterType="Payment" useGeneratedKeys="true" keyProperty="id">
         insert into payment(serial)  values(#{serial});
     </insert>
 
@@ -14,10 +14,11 @@
     </resultMap>
     <select id="getPaymentById" parameterType="Long" resultMap="BaseResultMap">
         select * from payment where id=#{id};
-    </select>
+    </select>-->
 
-    <select id="login" resultMap="com.zy.blog.entity.Admin" >
-        select * from admin where username=#{username} and password=#{password};
+
+    <select id="login" resultType="com.zy.blog.entity.Admin" >
+        select * from t_admin where user_name=#{arg0} and pass_word=#{arg1};
     </select>
 
 </mapper>
