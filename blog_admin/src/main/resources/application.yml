@@ -1,0 +1,18 @@
+server:
+  port: 5001
+
+spring:
+  application:
+    name: blog-admin
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 47.114.172.114:80
+
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

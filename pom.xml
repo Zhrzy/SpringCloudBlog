@@ -53,13 +53,13 @@
         <scope>import</scope>
       </dependency>
       <!--spring cloud alibaba 2.1.0.RELEASE-->
-      <dependency>
+<!--      <dependency>
         <groupId>com.alibaba.cloud</groupId>
         <artifactId>spring-cloud-alibaba-dependencies</artifactId>
         <version>2.1.0.RELEASE</version>
         <type>pom</type>
         <scope>import</scope>
-      </dependency>
+      </dependency>-->
       <dependency>
         <groupId>mysql</groupId>
         <artifactId>mysql-connector-java</artifactId>
