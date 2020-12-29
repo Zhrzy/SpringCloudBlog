@@ -1,5 +1,7 @@
 package com.zy.blog.entity;
 
+import com.zy.blog.base.EntityBase;
+
 import java.util.Date;
 import java.util.List;
 
@@ -7,9 +9,9 @@ import java.util.List;
  * 管理员表
  */
 
-public class Admin {
+public class Admin extends EntityBase {
 
-    private static final long serialVersionUID = 1L;
+   // private static final long serialVersionUID = 1L;
 
     /**
      * 用户名
@@ -123,9 +125,9 @@ public class Admin {
      */
     private String validCode;
 
-    public static long getSerialVersionUID() {
+   /* public static long getSerialVersionUID() {
         return serialVersionUID;
-    }
+    }*/
 
     public String getUserName() {
         return userName;

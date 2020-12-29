@@ -15,9 +15,14 @@
     <select id="getPaymentById" parameterType="Long" resultMap="BaseResultMap">
         select * from payment where id=#{id};
     </select>-->
-
-
-    <select id="login" resultType="com.zy.blog.entity.Admin" >
+    <!--定义Admin的ResultMap-->
+    <resultMap id="AdminMap" type="com.zy.blog.entity.Admin">
+        <id column="uid" property="uid" javaType="String"/>
+        <id column="user_name" property="userName" javaType="String"/>
+        <id column="pass_word" property="passWord" javaType="String"/>
+        <id column="gender" property="gender" javaType="String"/>
+    </resultMap>
+    <select id="login" resultMap="AdminMap" >
         select * from t_admin where user_name=#{arg0} and pass_word=#{arg1};
     </select>
 

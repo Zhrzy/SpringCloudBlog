@@ -1,6 +1,7 @@
 package com.zy.blog.entity;
 
 
+import com.zy.blog.base.EntityBase;
 
 /**
  * <p>
@@ -8,7 +9,7 @@ package com.zy.blog.entity;
  * </p>
  */
 
-public class Role{
+public class Role extends EntityBase {
 
     private static final long serialVersionUID = 1L;
 
