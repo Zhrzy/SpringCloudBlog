@@ -20,6 +20,25 @@
         <id column="uid" property="uid" javaType="String"/>
         <id column="user_name" property="userName" javaType="String"/>
         <id column="pass_word" property="passWord" javaType="String"/>
+        <id column="avatar" property="avatar" javaType="String"/>
+        <id column="email" property="email" javaType="String"/>
+        <id column="birthday" property="birthday" javaType="String"/>
+        <id column="mobile" property="mobile" javaType="String"/>
+        <id column="valid_code" property="validCode" javaType="String"/>
+        <id column="summary" property="summary" javaType="String"/>
+        <id column="login_count" property="loginCount" javaType="Integer"/>
+        <id column="last_login_time" property="lastLoginTime" javaType="String"/>
+        <id column="last_login_ip" property="lastLoginIp" javaType="String"/>
+        <id column="status" property="status" javaType="Integer"/>
+        <id column="create_time" property="createTime" javaType="java.sql.Timestamp"/>
+        <id column="update_time" property="updateTime" javaType="java.sql.Timestamp"/>
+        <id column="nick_name" property="nickName" javaType="String"/>
+        <id column="qq_number" property="qqNumber" javaType="String"/>
+        <id column="we_chat" property="weChat" javaType="String"/>
+        <id column="occupation" property="occupation" javaType="String"/>
+        <id column="github" property="github" javaType="String"/>
+        <id column="gitee" property="gitee" javaType="String"/>
+        <id column="role_uid" property="roleUid" javaType="String"/>
         <id column="gender" property="gender" javaType="String"/>
     </resultMap>
     <select id="login" resultMap="AdminMap" >

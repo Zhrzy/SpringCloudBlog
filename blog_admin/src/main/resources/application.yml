@@ -25,5 +25,5 @@ management:
 #整合mybatis
 mybatis:
   mapper-locations: classpath:Mapper/*.xml
-  #config-location: classpath:mybatis/mybatis.cfg.xml
+  config-location: classpath:mybatis/mybatis.cfg.xml
   type-aliases-package: com.zy.blog.entity

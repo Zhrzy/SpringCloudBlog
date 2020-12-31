@@ -7,6 +7,7 @@
 
     <settings>
         <setting name="cacheEnabled" value="true"/><!-- 二级缓存开启 -->
+        <setting name="callSettersOnNulls" value="true"/> <!--开启显示空字段-->
     </settings>
 
 </configuration>

@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Admin extends EntityBase {
 
-   // private static final long serialVersionUID = 1L;
+
 
     /**
      * 用户名
@@ -125,9 +125,6 @@ public class Admin extends EntityBase {
      */
     private String validCode;
 
-   /* public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }*/
 
     public String getUserName() {
         return userName;
@@ -303,5 +300,45 @@ public class Admin extends EntityBase {
 
     public void setValidCode(String validCode) {
         this.validCode = validCode;
+    }
+
+    @Override
+    public String getUid() {
+        return super.getUid();
+    }
+
+    @Override
+    public void setUid(String uid) {
+        super.setUid(uid);
+    }
+
+    @Override
+    public int getStatus() {
+        return super.getStatus();
+    }
+
+    @Override
+    public void setStatus(int status) {
+        super.setStatus(status);
+    }
+
+    @Override
+    public Date getCreateTime() {
+        return super.getCreateTime();
+    }
+
+    @Override
+    public void setCreateTime(Date createTime) {
+        super.setCreateTime(createTime);
+    }
+
+    @Override
+    public Date getUpdateTime() {
+        return super.getUpdateTime();
+    }
+
+    @Override
+    public void setUpdateTime(Date updateTime) {
+        super.setUpdateTime(updateTime);
     }
 }
