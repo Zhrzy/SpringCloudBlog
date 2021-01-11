@@ -1,0 +1,12 @@
+server:
+  port: 5555
+spring:
+  application:
+    name: blog-oauth
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 47.114.172.114:80
+feign:
+  hystrix:
+    enabled: true
