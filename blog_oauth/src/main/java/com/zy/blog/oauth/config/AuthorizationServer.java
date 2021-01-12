@@ -79,7 +79,7 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
                 .authorizedGrantTypes("authorization_code","password","client_credentials","implicit","refresh_token")
                 .scopes("all") //授权范围
                 .autoApprove(false)
-                .redirectUris("www.baidu.com");
+                .redirectUris("http://www.baidu.com");
     }
 
     /**

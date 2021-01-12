@@ -16,6 +16,7 @@
     <module>Testpom</module>
   </modules>
 
+
     <!-- 统一管理jar包版本 -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -144,6 +145,12 @@
             <artifactId>spring‐security‐jwt</artifactId>
             <version>1.0.10.RELEASE</version>
         </dependency>
+
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit.version}</version>
+      </dependency>
 
     </dependencies>
   </dependencyManagement>
