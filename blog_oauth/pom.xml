@@ -12,6 +12,13 @@
     <artifactId>blog_oauth</artifactId>
 
     <dependencies>
+
+        <dependency>
+            <groupId>com.zy.blog</groupId>
+            <artifactId>blog_entity</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <!--openfeign-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
