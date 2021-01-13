@@ -17,10 +17,19 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
     @Autowired
     private AdminService adminService;
+
     @GetMapping("/login")
     public Object login(@RequestParam("username")String username, @RequestParam("password")String password){
         Admin admin = adminService.login(username, password);
         System.out.println(admin+"...........");
-        return ResultUtil.result("200","success",admin);
+        //return ResultUtil.result("200","success",admin);
+        return "result success";
     }
+
+    @GetMapping("/test1")
+    public Object test(){
+
+        return "result success test1";
+    }
+
 }

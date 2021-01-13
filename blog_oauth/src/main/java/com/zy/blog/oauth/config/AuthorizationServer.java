@@ -74,7 +74,7 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
         /*使用内存方式，配置客户端详情,测试用*/
         clients.inMemory()
                 .withClient("c1")
-                .scopes(new BCryptPasswordEncoder().encode("secret"))
+                .secret(new BCryptPasswordEncoder().encode("secret"))
                 .resourceIds("res1")
                 .authorizedGrantTypes("authorization_code","password","client_credentials","implicit","refresh_token")
                 .scopes("all") //授权范围
