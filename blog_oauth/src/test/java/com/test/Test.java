@@ -12,7 +12,7 @@ public class Test {
     @org.junit.Test
     public void test1(){
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String ss = passwordEncoder.encode("123");
+        String ss = passwordEncoder.encode("secret");
         System.out.println(ss);
     }
 }
