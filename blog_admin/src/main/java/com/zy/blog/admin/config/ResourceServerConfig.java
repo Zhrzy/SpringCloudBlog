@@ -1,5 +1,6 @@
 package com.zy.blog.admin.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -10,6 +11,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
 import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 
 /*
 * 资源服务器配置
@@ -21,11 +23,15 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     public static final String RESOURCE_ID="res1";
 
+    @Autowired
+    private TokenStore tokenStore;
+
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
         resources.resourceId(RESOURCE_ID)
-                .tokenServices(tokenService())
+                //.tokenServices(tokenService()) 调用了授权服务的校验token，这里不用了，改为下面一行的本地校验，并且注释[1]
+                .tokenStore(tokenStore)//资源服务本地解析token
                 .stateless(true);
     }
 
@@ -33,14 +39,14 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/test/login").hasAnyAuthority("p1")
+                .antMatchers("/test/login").hasAnyAuthority("admin")
                 .antMatchers("/test/test1").permitAll()
                 .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
 
-    //资源服务令牌解析服务,使用的是授权服务器的校验，一般不使用，这里仅仅测试
+    // [1] 资源服务令牌解析服务,使用的是授权服务器的校验，一般不使用，这里仅仅测试
     @Bean
     public ResourceServerTokenServices tokenService() {
         //使用远程服务请求授权服务器校验token,必须指定校验token 的url、client_id，client_secret

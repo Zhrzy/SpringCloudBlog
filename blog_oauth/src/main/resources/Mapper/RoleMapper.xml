@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.zy.blog.oauth.mapper.RoleMapper">
+
+   <!-- <insert id="create" parameterType="Payment" useGeneratedKeys="true" keyProperty="id">
+        insert into payment(serial)  values(#{serial});
+    </insert>
+
+
+    <resultMap id="BaseResultMap" type="com.atguigu.springcloud.entities.Payment">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <id column="serial" property="serial" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="getPaymentById" parameterType="Long" resultMap="BaseResultMap">
+        select * from payment where id=#{id};
+    </select>-->
+    <!--定义Admin的ResultMap-->
+    <resultMap id="RoleMap" type="com.zy.blog.entity.Role">
+        <id column="role_name" property="roleName" javaType="String"/>
+    </resultMap>
+    <select id="getRoleListByName" resultMap="RoleMap" >
+        select t.role_name from t_role t
+        left join t_admin_role r
+         on t.uid=r.role_uid
+        left join t_admin a
+        on r.admin_uid= a.uid
+         where a.user_name=#{arg0};
+    </select>
+
+</mapper>
