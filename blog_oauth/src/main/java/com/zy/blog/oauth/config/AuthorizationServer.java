@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -55,11 +56,16 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
     /**
      * 1.客户端详情相关配置
      */
     @Bean
-    public ClientDetailsService clientDetailsService1(DataSource dataSource) {
+    public ClientDetailsService clientDetailsService(DataSource dataSource) {
         ClientDetailsService clientDetailsService = new JdbcClientDetailsService(dataSource);
         ((JdbcClientDetailsService) clientDetailsService).setPasswordEncoder(passwordEncoder);
         return clientDetailsService;
@@ -101,6 +107,7 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
         security.tokenKeyAccess("permitAll()") //当使用JwtToken且使用非对称加密时，资源服务用于获取公钥而开放的，这里指这个 endpoint完全公开
                 .checkTokenAccess("permitAll()")//checkToken这个endpoint完全公开
                 .allowFormAuthenticationForClients();//允许表单认证
+        security.passwordEncoder(passwordEncoder);
 
     }
 
