@@ -1,7 +1,7 @@
 package com.zy.blog.utils;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.alibaba.fastjson.JSON;
+
 
 /**
  * @author zy 1716457206@qq.com
@@ -15,9 +15,10 @@ public class JsonUtils {
      **/
     public static String objectToJson (Object obj){
 
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+        //Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         try {
-            String json = gson.toJson(obj);
+            //String json = gson.toJson(obj);
+            String json = JSON.toJSONString(obj);
             return json;
         } catch (Exception e) {
             e.printStackTrace();

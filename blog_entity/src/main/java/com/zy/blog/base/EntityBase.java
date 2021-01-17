@@ -3,7 +3,6 @@ package com.zy.blog.base;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
-
 /**
  * 实体类公共字段
  * @author zy 1716457206@qq.com

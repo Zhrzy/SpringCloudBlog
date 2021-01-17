@@ -19,11 +19,12 @@ public class TestController {
     private AdminService adminService;
 
     @GetMapping("/login")
-    public Object login(@RequestParam("username")String username, @RequestParam("password")String password){
+    public Object login(@RequestParam( value = "username",defaultValue = "3")String username, @RequestParam("password")String password){
+        System.out.println(username+"==>"+password);
         Admin admin = adminService.login(username, password);
         System.out.println(admin+"...........");
-        //return ResultUtil.result("200","success",admin);
-        return "result success";
+        return ResultUtil.result("200","success",admin);
+       // return "result success";
     }
 
     @GetMapping("/test1")

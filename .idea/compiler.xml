@@ -10,6 +10,7 @@
         <module name="blog_entity" />
         <module name="blog_gateway" />
         <module name="blog_oauth" />
+        <module name="blog_uuagateway" />
         <module name="Testpom" />
       </profile>
     </annotationProcessing>
