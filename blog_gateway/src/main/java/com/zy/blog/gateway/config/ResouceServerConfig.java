@@ -2,11 +2,11 @@ package com.zy.blog.gateway.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+/*import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.TokenStore;*/
 
 /**
  * @author Administrator
@@ -18,10 +18,10 @@ public class ResouceServerConfig  {
     public static final String RESOURCE_ID = "res1";
 
 
-    //uaa资源服务配置
-    @Configuration
-    @EnableResourceServer
-    public class UAAServerConfig extends ResourceServerConfigurerAdapter {
+    //Admim资源服务配置
+    //@Configuration
+    /*@EnableResourceServer
+    public class AdminServerConfig extends ResourceServerConfigurerAdapter {
         @Autowired
         private TokenStore tokenStore;
 
@@ -34,16 +34,16 @@ public class ResouceServerConfig  {
         @Override
         public void configure(HttpSecurity http) throws Exception {
             http.authorizeRequests()
-                 .antMatchers("/uaa/**").permitAll();
+                 .antMatchers("/**").permitAll();
         }
     }
 
 
-    //order资源
+    //OauthServer资源
     //uaa资源服务配置
     @Configuration
     @EnableResourceServer
-    public class OrderServerConfig extends ResourceServerConfigurerAdapter {
+    public class OauthServerConfig extends ResourceServerConfigurerAdapter {
         @Autowired
         private TokenStore tokenStore;
 
@@ -57,12 +57,13 @@ public class ResouceServerConfig  {
         public void configure(HttpSecurity http) throws Exception {
             http
                     .authorizeRequests()
-                    .antMatchers("/order/**").access("#oauth2.hasScope('ROLE_API')");
-        }
+                    //
+                    .antMatchers("/**").permitAll();
+        }*/
     }
 
 
     //配置其它的资源服务..
 
 
-}
+

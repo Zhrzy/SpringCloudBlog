@@ -1,10 +1,13 @@
 package com.zy.blog.gateway.config;
 
+import org.springframework.boot.convert.ApplicationConversionService;
+import org.springframework.cloud.gateway.config.GatewayAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.core.convert.ConversionService;
+/*import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
-import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;*/
 
 /**
  * @author Administrator
@@ -15,7 +18,7 @@ public class TokenConfig {
 
     private String SIGNING_KEY = "uaa123";
 
-    @Bean
+   /* @Bean
     public TokenStore tokenStore() {
         //JWT令牌存储方案
         return new JwtTokenStore(accessTokenConverter());
@@ -26,11 +29,12 @@ public class TokenConfig {
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
         converter.setSigningKey(SIGNING_KEY); //对称秘钥，资源服务器使用该秘钥来验证
         return converter;
-    }
+    }*/
 
    /* @Bean
     public TokenStore tokenStore() {
         //使用内存存储令牌（普通令牌）
         return new InMemoryTokenStore();
     }*/
+
 }
