@@ -1,0 +1,19 @@
+server:
+  port: 6001
+
+spring:
+  application:
+    name: blog-admin-test
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 47.114.172.114:80
+
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
