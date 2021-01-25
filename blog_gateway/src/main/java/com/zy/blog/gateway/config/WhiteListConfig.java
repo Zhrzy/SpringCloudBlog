@@ -14,7 +14,7 @@ import java.util.List;
 public class WhiteListConfig {
     private List<String> urls=new ArrayList<>();
     public WhiteListConfig()  {
-        urls.add("/test/test1");
+        urls.add("/admin/test/test1");
     }
     public List<String> getUrls() {
 
