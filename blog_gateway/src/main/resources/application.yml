@@ -31,4 +31,4 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: 'http://localhost:8000/getPublicKey'
+          jwk-set-uri: 'http://localhost:5555/getPublicKey'
