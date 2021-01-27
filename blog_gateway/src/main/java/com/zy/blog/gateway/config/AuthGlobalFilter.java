@@ -1,13 +1,4 @@
-package com.zy.blog.gateway.filter;
-
-/**
- * @author zy 1716457206@qq.com
- */
-
-import org.springframework.core.Ordered;
-import org.springframework.stereotype.Component;
-
-
+package com.zy.blog.gateway.config;
 
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONObject;
@@ -26,24 +17,27 @@ import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
+
 import java.nio.charset.Charset;
 
 /**
  * 黑名单token过滤器
  */
 @Component
-public class GlobalFilter implements GlobalFilter, Ordered {
+public class AuthGlobalFilter implements GlobalFilter, Ordered {
+
 
 
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        String token = exchange.getRequest().getHeaders().getFirst(AuthConstants.JWT_TOKEN_HEADER);
+        String token = exchange.getRequest().getHeaders().getFirst("Authorization");
+        System.out.println(token+"////");
         if (StrUtil.isBlank(token)) {
             return chain.filter(exchange);
         }
-        token = token.replace(AuthConstants.JWT_TOKEN_PREFIX, Strings.EMPTY);
-        JWSObject jwsObject = JWSObject.parse(token);
+        //token = token.replace(AuthConstants.JWT_TOKEN_PREFIX, Strings.EMPTY);
+        /*JWSObject jwsObject = JWSObject.parse(token);
         String payload = jwsObject.getPayload().toString();
 
         // 黑名单token(登出、修改密码)校验
@@ -61,14 +55,16 @@ public class GlobalFilter implements GlobalFilter, Ordered {
             DataBuffer buffer = response.bufferFactory().wrap(body.getBytes(Charset.forName("UTF-8")));
             return response.writeWith(Mono.just(buffer));
         }
-
+*/
         ServerHttpRequest request = exchange.getRequest().mutate()
-                .header(AuthConstants.JWT_PAYLOAD_KEY, payload)
+                .header("Authorization", token)
                 .build();
         exchange = exchange.mutate().request(request).build();
         return chain.filter(exchange);
     }
 
     @Override
-    public int getOrder() x
+    public int getOrder() {
+        return 0;
+    }
 }
