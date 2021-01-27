@@ -67,7 +67,7 @@ public class ResourceServerConfig {
                         response.getHeaders().set(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
                         response.getHeaders().set("Access-Control-Allow-Origin", "*");
                         response.getHeaders().set("Cache-Control", "no-cache");
-                        String body = JSONUtil.toJsonStr("unAution");
+                        String body = JSONUtil.toJsonStr("未认证");
                         DataBuffer buffer = response.bufferFactory().wrap(body.getBytes(Charset.forName("UTF-8")));
                         return response.writeWith(Mono.just(buffer))
                                 .doOnError(error -> DataBufferUtils.release(buffer));
@@ -89,7 +89,7 @@ public class ResourceServerConfig {
                         response.getHeaders().set(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
                         response.getHeaders().set("Access-Control-Allow-Origin", "*");
                         response.getHeaders().set("Cache-Control", "no-cache");
-                        String body = JSONUtil.toJsonStr("TokenExprise");
+                        String body = JSONUtil.toJsonStr("Token无效或过期");
                         DataBuffer buffer = response.bufferFactory().wrap(body.getBytes(Charset.forName("UTF-8")));
                         return response.writeWith(Mono.just(buffer))
                                 .doOnError(error -> DataBufferUtils.release(buffer));
@@ -115,6 +115,7 @@ public class ResourceServerConfig {
 
         JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
         jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(jwtGrantedAuthoritiesConverter);
+
         return new ReactiveJwtAuthenticationConverterAdapter(jwtAuthenticationConverter);
     }
 }

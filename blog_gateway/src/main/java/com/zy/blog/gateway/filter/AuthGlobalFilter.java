@@ -1,14 +1,5 @@
 package com.zy.blog.gateway.filter;
 
-/**
- * @author zy 1716457206@qq.com
- */
-
-import org.springframework.core.Ordered;
-import org.springframework.stereotype.Component;
-
-
-
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
@@ -23,28 +14,46 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
+
 import java.nio.charset.Charset;
+import java.text.ParseException;
 
 /**
  * 黑名单token过滤器
  */
 @Component
-public class GlobalFilter implements GlobalFilter, Ordered {
+public class AuthGlobalFilter implements GlobalFilter, Ordered {
+
 
 
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        String token = exchange.getRequest().getHeaders().getFirst(AuthConstants.JWT_TOKEN_HEADER);
+        String token = exchange.getRequest().getHeaders().getFirst("Authorization");
+        System.out.println("////"+token);
         if (StrUtil.isBlank(token)) {
             return chain.filter(exchange);
         }
-        token = token.replace(AuthConstants.JWT_TOKEN_PREFIX, Strings.EMPTY);
-        JWSObject jwsObject = JWSObject.parse(token);
-        String payload = jwsObject.getPayload().toString();
+        token = token.replace("Bearer ", Strings.EMPTY);
+        try {
+            JWSObject  jwsObject = JWSObject.parse(token);
+            String payload = jwsObject.getPayload().toString();
+            System.out.println("负载 "+payload);
+
+            JSONObject jsonObject = JSONUtil.parseObj(payload);
+            String jti = jsonObject.getStr("authorities");
+            System.out.println("权限"+jti);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        /*
+
 
         // 黑名单token(登出、修改密码)校验
         JSONObject jsonObject = JSONUtil.parseObj(payload);
@@ -61,14 +70,16 @@ public class GlobalFilter implements GlobalFilter, Ordered {
             DataBuffer buffer = response.bufferFactory().wrap(body.getBytes(Charset.forName("UTF-8")));
             return response.writeWith(Mono.just(buffer));
         }
-
+*/
         ServerHttpRequest request = exchange.getRequest().mutate()
-                .header(AuthConstants.JWT_PAYLOAD_KEY, payload)
+                .header("Authorization", token)
                 .build();
         exchange = exchange.mutate().request(request).build();
         return chain.filter(exchange);
     }
 
     @Override
-    public int getOrder() x
+    public int getOrder() {
+        return 0;
+    }
 }

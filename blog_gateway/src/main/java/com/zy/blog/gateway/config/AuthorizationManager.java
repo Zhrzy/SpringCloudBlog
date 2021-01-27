@@ -39,8 +39,8 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
         permitAll.add("/webjars/**");
         permitAll.add("/doc.html");
         permitAll.add("/swagger-ui.html");
-        permitAll.add("/**/oauth/**");
-        permitAll.add("/**/test/**");
+        permitAll.add("/oauth/**");
+        permitAll.add("/admin/*/**");
     }
 
     @Override
@@ -68,10 +68,15 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
     private boolean checkAuthorities(Authentication auth, String requestPath) {
         if(auth instanceof Authentication){
             Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
+            boolean a=authorities.stream()
+                    .map(GrantedAuthority::getAuthority)
+                    .filter(item -> !item.startsWith("ROLE_"))
+                    .anyMatch(permission -> antPathMatcher.match(permission, requestPath));
+            System.out.println(authorities.iterator().next().toString()+"/"+a);
 
             return authorities.stream()
                     .map(GrantedAuthority::getAuthority)
-                    .filter(item -> !item.startsWith("A"))
+                    .filter(item -> !item.startsWith("ROLE_"))
                     .anyMatch(permission -> antPathMatcher.match(permission, requestPath));
         }
         return true;
@@ -95,6 +100,7 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
 
         // token为空拒绝访问
         String token = request.getHeaders().getFirst("Authorization");
+        System.out.println(token+"?????");
         if (StrUtil.isBlank(token)) {
             return Mono.just(new AuthorizationDecision(false));
         }
