@@ -40,7 +40,7 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
         permitAll.add("/doc.html");
         permitAll.add("/swagger-ui.html");
         permitAll.add("/oauth/**");
-        permitAll.add("/admin/*/**");
+        permitAll.add("/admin/test/test1");
     }
 
     @Override
@@ -73,11 +73,13 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
                     .filter(item -> !item.startsWith("ROLE_"))
                     .anyMatch(permission -> antPathMatcher.match(permission, requestPath));
             System.out.println(authorities.iterator().next().toString()+"/"+a);
+            authorities.stream().forEach(s-> System.out.println(((GrantedAuthority) s).toString()));
 
-            return authorities.stream()
+return true;
+            /*return authorities.stream()
                     .map(GrantedAuthority::getAuthority)
                     .filter(item -> !item.startsWith("ROLE_"))
-                    .anyMatch(permission -> antPathMatcher.match(permission, requestPath));
+                    .anyMatch(permission -> antPathMatcher.match(permission, requestPath));*/
         }
         return true;
     }
@@ -95,6 +97,7 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
 
         // 是否直接放行
         if (permitAll(requestPath)) {
+            System.out.println("哈哈·");
             return Mono.just(new AuthorizationDecision(true));
         }
 

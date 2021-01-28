@@ -1,4 +1,4 @@
-package com.zy.blog.gateway.filter;
+package com.zy.blog.gateway.config;
 
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONObject;
@@ -39,9 +39,9 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
         if (StrUtil.isBlank(token)) {
             return chain.filter(exchange);
         }
-        token = token.replace("Bearer ", Strings.EMPTY);
+        String  tokensimple = token.replace("Bearer ", Strings.EMPTY);
         try {
-            JWSObject  jwsObject = JWSObject.parse(token);
+            JWSObject  jwsObject = JWSObject.parse(tokensimple);
             String payload = jwsObject.getPayload().toString();
             System.out.println("负载 "+payload);
 
