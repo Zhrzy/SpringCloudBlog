@@ -9,7 +9,6 @@ import org.springframework.security.oauth2.jwt.ReactiveJwtDecoder;
 @SpringBootApplication
 @EnableDiscoveryClient
 public class AppGateway {
-
     public static void main(String[] args) {
         SpringApplication.run(AppGateway.class, args);
     }

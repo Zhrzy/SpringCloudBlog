@@ -68,18 +68,10 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
     private boolean checkAuthorities(Authentication auth, String requestPath) {
         if(auth instanceof Authentication){
             Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
-            boolean a=authorities.stream()
+            return authorities.stream()
                     .map(GrantedAuthority::getAuthority)
-                    .filter(item -> !item.startsWith("ROLE_"))
-                    .anyMatch(permission -> antPathMatcher.match(permission, requestPath));
-            System.out.println(authorities.iterator().next().toString()+"/"+a);
-            authorities.stream().forEach(s-> System.out.println(((GrantedAuthority) s).toString()));
-
-return true;
-            /*return authorities.stream()
-                    .map(GrantedAuthority::getAuthority)
-                    .filter(item -> !item.startsWith("ROLE_"))
-                    .anyMatch(permission -> antPathMatcher.match(permission, requestPath));*/
+                    .filter(item -> item.startsWith("ROLE_"))
+                    .anyMatch(permission -> antPathMatcher.match(permission, "ROLE_admin"));
         }
         return true;
     }
@@ -97,13 +89,11 @@ return true;
 
         // 是否直接放行
         if (permitAll(requestPath)) {
-            System.out.println("哈哈·");
             return Mono.just(new AuthorizationDecision(true));
         }
 
         // token为空拒绝访问
         String token = request.getHeaders().getFirst("Authorization");
-        System.out.println(token+"?????");
         if (StrUtil.isBlank(token)) {
             return Mono.just(new AuthorizationDecision(false));
         }

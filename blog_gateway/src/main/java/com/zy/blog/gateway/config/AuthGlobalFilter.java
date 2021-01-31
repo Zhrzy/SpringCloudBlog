@@ -3,6 +3,7 @@ package com.zy.blog.gateway.config;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
+import com.alibaba.fastjson.JSON;
 import com.nimbusds.jose.JWSObject;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -22,6 +23,8 @@ import reactor.core.publisher.Mono;
 
 import java.nio.charset.Charset;
 import java.text.ParseException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 黑名单token过滤器
@@ -29,33 +32,28 @@ import java.text.ParseException;
 @Component
 public class AuthGlobalFilter implements GlobalFilter, Ordered {
 
-
-
-
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         String token = exchange.getRequest().getHeaders().getFirst("Authorization");
-        System.out.println("////"+token);
         if (StrUtil.isBlank(token)) {
             return chain.filter(exchange);
         }
+        Map<String,Object> jsonToken = new HashMap<>();
         String  tokensimple = token.replace("Bearer ", Strings.EMPTY);
         try {
             JWSObject  jwsObject = JWSObject.parse(tokensimple);
             String payload = jwsObject.getPayload().toString();
-            System.out.println("负载 "+payload);
-
             JSONObject jsonObject = JSONUtil.parseObj(payload);
-            String jti = jsonObject.getStr("authorities");
-            System.out.println("权限"+jti);
+            String authorities = jsonObject.getStr("authorities");
+            String userInfo =jsonObject.getStr("user_name");
+            jsonToken.put("principal",userInfo);
+            jsonToken.put("authorities",authorities);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
         /*
-
-
-        // 黑名单token(登出、修改密码)校验
+        // 针对token(登出、修改密码)校验
         JSONObject jsonObject = JSONUtil.parseObj(payload);
         String jti = jsonObject.getStr("jti"); // JWT唯一标识
 
@@ -70,9 +68,9 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
             DataBuffer buffer = response.bufferFactory().wrap(body.getBytes(Charset.forName("UTF-8")));
             return response.writeWith(Mono.just(buffer));
         }
-*/
+        */
         ServerHttpRequest request = exchange.getRequest().mutate()
-                .header("Authorization", token)
+                .header("json_token", JSON.toJSONString(jsonToken))
                 .build();
         exchange = exchange.mutate().request(request).build();
         return chain.filter(exchange);

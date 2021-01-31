@@ -26,7 +26,6 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Autowired
     private TokenStore tokenStore;
 
-
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
         resources.resourceId(RESOURCE_ID)
@@ -39,7 +38,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/test/login").hasAnyAuthority("admin")
+                //.antMatchers("/test/login").hasAnyAuthority("admin")
                 .antMatchers("/test/test1").permitAll()
                 .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

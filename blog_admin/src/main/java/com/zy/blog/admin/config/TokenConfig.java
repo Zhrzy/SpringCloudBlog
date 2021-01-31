@@ -19,7 +19,6 @@ public class TokenConfig {
     private String SIGNING_KEY = "oauthTokenKey";
     @Bean
     public TokenStore tokenStore(){
-
         /*方式1：TokenStore 这个接口有一个默认的实现，它就是 InMemoryTokenStore*/
         //return new InMemoryTokenStore();
 

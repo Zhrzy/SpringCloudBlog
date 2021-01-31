@@ -49,7 +49,6 @@ public class ResourceServerConfig {
                 .accessDeniedHandler(accessDeniedHandler()) // 处理未授权
                 .authenticationEntryPoint(authenticationEntryPoint()) //处理未认证
                 .and().csrf().disable();
-
         return http.build();
     }
 
@@ -72,7 +71,6 @@ public class ResourceServerConfig {
                         return response.writeWith(Mono.just(buffer))
                                 .doOnError(error -> DataBufferUtils.release(buffer));
                     });
-
             return mono;
         };
     }

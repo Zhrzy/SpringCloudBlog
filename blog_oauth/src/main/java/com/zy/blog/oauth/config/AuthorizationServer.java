@@ -143,8 +143,6 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
                 .authorizationCodeServices(authorizationCodeServices)
                 .tokenServices(tokenService())
                 .allowedTokenEndpointRequestMethods(HttpMethod.POST);
-
-
     }
 
 
