@@ -7,12 +7,22 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="blog_admin" />
-        <module name="blog_entity" />
         <module name="blog_gateway" />
-        <module name="blog_oauth" />
+        <module name="blog_entity" />
         <module name="blog_uuagateway" />
         <module name="Testpom" />
+        <module name="blog_oauth" />
       </profile>
     </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Testpom" options="-parameters" />
+      <module name="blog_admin" options="-parameters" />
+      <module name="blog_entity" options="-parameters" />
+      <module name="blog_gateway" options="-parameters" />
+      <module name="blog_oauth" options="-parameters" />
+      <module name="blog_uuagateway" options="-parameters" />
+    </option>
   </component>
 </project>

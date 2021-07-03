@@ -31,8 +31,8 @@ public class TestController {
 
     @GetMapping("/test1")
     public Object test(){
-
-        return "result success test1";
+        System.out.println("............123");
+        return ResultUtil.result("200","success","admin");
     }
 
 }

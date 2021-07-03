@@ -3,10 +3,16 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Testpom" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Testpom/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/blog_admin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/blog_admin/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/blog_entity" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/blog_entity/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/blog_gateway" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/blog_gateway/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/blog_oauth" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/blog_oauth/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/blog_uuagateway" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/blog_uuagateway/src/main/java" charset="UTF-8" />
   </component>
 </project>

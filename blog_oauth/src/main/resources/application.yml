@@ -6,11 +6,11 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 47.114.172.114:80
+        server-addr: 106.14.136.83:8848
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource           # 当前数据源操作类型
     driver-class-name: org.gjt.mm.mysql.Driver         # mysql驱动包
-    url: jdbc:mysql://rm-bp1iv12zo818oql20zo.mysql.rds.aliyuncs.com:3306/mogu_blog?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&useSSL=false&serverTimezone=GMT%2B8&autoReconnect=true&failOverReadOnly=false
+    url: jdbc:mysql://rm-uf6ea0i13i88ck5ecyo.mysql.rds.aliyuncs.com:3306/mogu_blog?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&useSSL=false&serverTimezone=GMT%2B8&autoReconnect=true&failOverReadOnly=false
     username: zy
     password: zhangyong123##
   main:
