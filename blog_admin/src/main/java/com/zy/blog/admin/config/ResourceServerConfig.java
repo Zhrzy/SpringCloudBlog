@@ -40,7 +40,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .authorizeRequests()
                 //.antMatchers("/test/login").hasAnyAuthority("admin")
                 .antMatchers("/test/test1").permitAll()
-                .antMatchers("admin/login").permitAll()
+                .antMatchers("admin/**").permitAll()
                 .and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }

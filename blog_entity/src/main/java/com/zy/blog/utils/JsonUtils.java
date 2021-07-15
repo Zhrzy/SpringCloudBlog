@@ -1,6 +1,8 @@
 package com.zy.blog.utils;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import jdk.internal.dynalink.beans.StaticClass;
 
 
 /**
@@ -24,5 +26,11 @@ public class JsonUtils {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static  JSONObject strToJson(String str){
+        if (str==null) str="";
+        JSONObject jsonObject =JSON.parseObject(str);
+        return jsonObject;
     }
 }

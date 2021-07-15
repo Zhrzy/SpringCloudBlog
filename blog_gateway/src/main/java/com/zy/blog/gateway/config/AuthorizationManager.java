@@ -41,6 +41,7 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
         permitAll.add("/swagger-ui.html");
         permitAll.add("/oauth/**");
         permitAll.add("/admin/test/test1");
+        permitAll.add("/admin/getInfo");
     }
 
     @Override

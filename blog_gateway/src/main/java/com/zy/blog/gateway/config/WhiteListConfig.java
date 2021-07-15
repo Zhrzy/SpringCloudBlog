@@ -15,7 +15,9 @@ public class WhiteListConfig {
     private List<String> urls=new ArrayList<>();
     public WhiteListConfig()  {
         urls.add("/admin/login");
+        urls.add("/admin/getInfo");
     }
+
     public List<String> getUrls() {
 
         return urls;

@@ -1,9 +1,13 @@
 package com.zy.blog.oauth.config;
 
+import cn.hutool.http.HttpStatus;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
@@ -23,6 +27,7 @@ import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.web.AuthenticationEntryPoint;
 
 import javax.sql.DataSource;
 import java.util.Arrays;
@@ -37,6 +42,7 @@ import java.util.Arrays;
 
 @Configuration
 @EnableAuthorizationServer
+
 public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
@@ -56,6 +62,8 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -104,11 +112,32 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
      **/
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+        /*CustomClientCredentialsTokenEndpointFilter endpointFilter = new CustomClientCredentialsTokenEndpointFilter(security);
+        endpointFilter.afterPropertiesSet();
+        endpointFilter.setAuthenticationEntryPoint(authenticationEntryPoint());
+        security.addTokenEndpointAuthenticationFilter(endpointFilter);*/
         security.tokenKeyAccess("permitAll()") //当使用JwtToken且使用非对称加密时，资源服务用于获取公钥而开放的，这里指这个 endpoint完全公开
                 .checkTokenAccess("permitAll()")//checkToken这个endpoint完全公开
                 .allowFormAuthenticationForClients();//允许表单认证
+
         security.passwordEncoder(passwordEncoder);
 
+    }
+
+    /**
+     * 自定义认证异常响应数据
+     */
+    @Bean
+    public AuthenticationEntryPoint authenticationEntryPoint() {
+        return (request, response, e) -> {
+            response.setStatus(HttpStatus.HTTP_OK);
+            response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
+            response.setHeader("Access-Control-Allow-Origin", "*");
+            response.setHeader("Cache-Control", "no-cache");
+            /*Result result = Result.failed(ResultCode.CLIENT_AUTHENTICATION_FAILED);*/
+            response.getWriter().print("123");
+            response.getWriter().flush();
+        };
     }
 
 
@@ -144,6 +173,7 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
                 .tokenServices(tokenService())
                 .allowedTokenEndpointRequestMethods(HttpMethod.POST);
     }
+
 
 
 
