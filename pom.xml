@@ -15,6 +15,7 @@
     <module>blog_gateway</module>
     <module>Testpom</module>
       <module>blog_uuagateway</module>
+      <module>projecttools</module>
   </modules>
 
   <parent>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zy.blog.admin.mapper.SystemDictDataMapper">
+  <resultMap id="BaseResultMap" type="com.zy.blog.entity.Dict">
+    <result column="oid" jdbcType="INTEGER" property="oid" />
+    <result column="dict_type_uid" jdbcType="VARCHAR" property="dictTypeUid" />
+    <result column="dict_label" jdbcType="VARCHAR" property="dictLabel" />
+    <result column="dict_value" jdbcType="VARCHAR" property="dictValue" />
+    <result column="css_class" jdbcType="VARCHAR" property="cssClass" />
+    <result column="list_class" jdbcType="VARCHAR" property="listClass" />
+    <result column="is_default" jdbcType="BIT" property="isDefault" />
+    <result column="create_by_uid" jdbcType="VARCHAR" property="createByUid" />
+    <result column="update_by_uid" jdbcType="VARCHAR" property="updateByUid" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="is_publish" jdbcType="VARCHAR" property="isPublish" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+  </resultMap>
+
+  <select id="selectByTypeList" resultMap="BaseResultMap" >
+    select * from t_sys_dict_data where dict_type_uid in #{arg0};
+  </select>
+</mapper>
