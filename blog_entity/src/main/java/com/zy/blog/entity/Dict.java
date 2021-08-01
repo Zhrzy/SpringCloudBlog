@@ -1,8 +1,11 @@
 package com.zy.blog.entity;
 
+
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.zy.blog.base.EntityBase;
 
-public class Dict extends EntityBase {
+@TableName(value = "t_sys_dict_data")
+public class Dict extends EntityBase<Dict> {
     private Integer oid;
 
     private String dictTypeUid;

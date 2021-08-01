@@ -1,10 +1,11 @@
 package com.zy.blog.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.zy.blog.base.EntityBase;
 
 import java.util.Date;
-
-public class Visitor extends EntityBase {
+@TableName(value = "t_visitor")
+public class Visitor extends EntityBase<Visitor> {
     private String userName;
 
     private String email;

@@ -1,8 +1,10 @@
 package com.zy.blog.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.zy.blog.base.EntityBase;
 
-public class Blog extends EntityBase {
+@TableName(value = "t_blog")
+public class Blog extends EntityBase<Blog> {
     private String title;
 
     private String summary;

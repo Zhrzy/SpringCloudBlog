@@ -1,8 +1,10 @@
 package com.zy.blog.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.zy.blog.base.EntityBase;
 
-public class Todo extends EntityBase {
+@TableName(value = "t_todo")
+public class Todo extends EntityBase<Todo> {
     private String adminUid;
 
     private String text;

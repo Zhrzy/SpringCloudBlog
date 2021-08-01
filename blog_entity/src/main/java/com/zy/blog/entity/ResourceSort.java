@@ -1,8 +1,9 @@
 package com.zy.blog.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.zy.blog.base.EntityBase;
-
-public class ResourceSort extends EntityBase {
+@TableName(value = "t_resource_sort")
+public class ResourceSort extends EntityBase<ResourceSort> {
     private String fileUid;
 
     private String sortName;

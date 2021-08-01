@@ -1,8 +1,10 @@
 package com.zy.blog.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.zy.blog.base.EntityBase;
 
-public class SysLog extends EntityBase {
+@TableName(value = "t_sys_log")
+public class SysLog extends EntityBase<SysLog>{
     private String userName;
 
     private String adminUid;

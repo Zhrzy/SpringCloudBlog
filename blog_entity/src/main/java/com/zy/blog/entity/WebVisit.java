@@ -1,8 +1,10 @@
 package com.zy.blog.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.zy.blog.base.EntityBase;
 
-public class WebVisit extends EntityBase {
+@TableName(value = "t_web_visit")
+public class WebVisit extends EntityBase<WebVisit> {
     private String userUid;
 
     private String ip;

@@ -1,16 +1,21 @@
 package com.zy.blog.base;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 /**
  * 实体类公共字段
  * @author zy 1716457206@qq.com
  */
-public class EntityBase {
+public class EntityBase<T extends Model> extends Model{
     /**
      * 唯一UID
      */
+    @TableId(value = "uid",type = IdType.UUID)
     public String uid;
 
     /**
@@ -36,6 +41,12 @@ public class EntityBase {
         this.createTime = new Date();
         this.updateTime = new Date();
     }
+
+    @Override
+    protected Serializable pkVal() {
+        return null;
+    }
+
 
     public String getUid() {
         return uid;

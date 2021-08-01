@@ -27,3 +27,7 @@ mybatis:
   mapper-locations: classpath:Mapper/*.xml
   config-location: classpath:mybatis/mybatis.cfg.xml
   type-aliases-package: com.zy.blog.entity
+
+mybatis-plus:
+  mapper-locations: classpath:Mapper/*.xml
+  type-aliases-package: com.zy.blog.entity

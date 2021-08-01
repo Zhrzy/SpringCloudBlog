@@ -3,7 +3,7 @@ package com.zy.blog.view;
 import com.zy.blog.base.ViewBase;
 
 public class SystemConfigView extends ViewBase {
-    private Boolean iconType;
+    private int iconType;
 
     private String qiNiuAccessKey;
 
@@ -59,11 +59,11 @@ public class SystemConfigView extends ViewBase {
 
     private String dashboardNotification;
 
-    public Boolean getIconType() {
+    public int getIconType() {
         return iconType;
     }
 
-    public void setIconType(Boolean iconType) {
+    public void setIconType(int iconType) {
         this.iconType = iconType;
     }
 

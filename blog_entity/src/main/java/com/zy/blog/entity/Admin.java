@@ -1,5 +1,6 @@
 package com.zy.blog.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.zy.blog.base.EntityBase;
 
 import java.util.Date;
@@ -9,7 +10,8 @@ import java.util.List;
  * 管理员表
  */
 
-public class Admin extends EntityBase {
+@TableName(value = "t_admin")
+public class Admin extends EntityBase<Admin> {
 
 
 

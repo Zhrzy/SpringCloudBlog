@@ -40,6 +40,7 @@
       <google.code.gson.version>2.7</google.code.gson.version>
       <spring-cloud.version>Hoxton.SR9</spring-cloud.version>
       <hutool.version>5.3.2</hutool.version>
+      <mp.version>3.0.1</mp.version>
     </properties>
 
   <dependencies>
@@ -129,6 +130,12 @@
         <artifactId>junit</artifactId>
         <version>${junit.version}</version>
       </dependency>
+
+     <!-- <dependency>
+        <groupId>com.baomidou</groupId>
+        <artifactId>mybatis-plus-boot-starter</artifactId>
+        <version>${mp.version}</version>
+      </dependency>-->
 
     </dependencies>
   </dependencyManagement>

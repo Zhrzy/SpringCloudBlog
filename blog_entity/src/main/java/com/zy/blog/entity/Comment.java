@@ -1,8 +1,10 @@
 package com.zy.blog.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.zy.blog.base.EntityBase;
 
-public class Comment extends EntityBase {
+@TableName(value = "t_comment")
+public class Comment extends EntityBase<Comment> {
     private String userUid;
 
     private String toUid;

@@ -1,8 +1,10 @@
 package com.zy.blog.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.zy.blog.base.EntityBase;
 
-public class Picture extends EntityBase {
+@TableName(value = "t_picture")
+public class Picture extends EntityBase<Picture> {
     private String fileUid;
 
     private String picName;

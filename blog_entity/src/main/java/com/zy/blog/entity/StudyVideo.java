@@ -1,8 +1,11 @@
 package com.zy.blog.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.zy.blog.base.EntityBase;
 
-public class StudyVideo extends EntityBase {
+
+@TableName(value = "t_study_video")
+public class StudyVideo extends EntityBase<StudyVideo> {
     private String fileUid;
 
     private String resourceSortUid;

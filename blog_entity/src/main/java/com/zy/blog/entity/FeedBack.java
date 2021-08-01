@@ -1,8 +1,10 @@
 package com.zy.blog.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.zy.blog.base.EntityBase;
 
-public class FeedBack extends EntityBase {
+@TableName(value = "t_feedback")
+public class FeedBack extends EntityBase<FeedBack> {
     private String userUid;
 
     private String content;

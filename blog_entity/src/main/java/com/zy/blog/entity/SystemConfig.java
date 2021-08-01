@@ -1,9 +1,11 @@
 package com.zy.blog.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.zy.blog.base.EntityBase;
 
-public class SystemConfig extends EntityBase {
-    private Boolean iconType;
+@TableName(value = "t_system_config")
+public class SystemConfig extends EntityBase<SystemConfig> {
+    private int iconType;
 
     private String qiNiuAccessKey;
 
@@ -59,11 +61,11 @@ public class SystemConfig extends EntityBase {
 
     private String dashboardNotification;
 
-    public Boolean getIconType() {
+    public int getIconType() {
         return iconType;
     }
 
-    public void setIconType(Boolean iconType) {
+    public void setIconType(int iconType) {
         this.iconType = iconType;
     }
 

@@ -1,8 +1,10 @@
 package com.zy.blog.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.zy.blog.base.EntityBase;
 
-public class BlogSort extends EntityBase {
+@TableName(value = "t_blog_sort")
+public class BlogSort extends EntityBase<BlogSort> {
     private String sortName;
 
     private String content;

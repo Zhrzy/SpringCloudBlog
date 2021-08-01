@@ -3,6 +3,8 @@ package com.zy.blog.admin.service.impl;
 import com.zy.blog.admin.mapper.AdminMapper;
 import com.zy.blog.admin.mapper.MenuMapper;
 import com.zy.blog.admin.service.AdminService;
+import com.zy.blog.base.ServiceBase;
+import com.zy.blog.base.ServiceImplBase;
 import com.zy.blog.entity.Admin;
 import com.zy.blog.entity.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +14,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Service
-public class AdminServiceImpl implements AdminService {
+public class AdminServiceImpl extends ServiceImplBase<AdminMapper,Admin> implements AdminService  {
 
     @Resource
     private AdminMapper adminMapper;

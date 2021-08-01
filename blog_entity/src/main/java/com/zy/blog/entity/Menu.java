@@ -1,10 +1,12 @@
 package com.zy.blog.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.zy.blog.base.EntityBase;
 
 import java.util.List;
 
-public class Menu extends EntityBase {
+@TableName(value = "t_category_menu")
+public class Menu extends EntityBase<Menu>{
     private String name;
 
     /**

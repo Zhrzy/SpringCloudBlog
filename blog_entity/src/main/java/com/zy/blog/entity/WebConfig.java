@@ -1,8 +1,10 @@
 package com.zy.blog.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.zy.blog.base.EntityBase;
 
-public class WebConfig extends EntityBase {
+@TableName(value = "t_web_config")
+public class WebConfig extends EntityBase<WebConfig> {
     private String logo;
 
     private String name;

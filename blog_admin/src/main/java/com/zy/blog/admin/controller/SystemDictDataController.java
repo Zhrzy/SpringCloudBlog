@@ -17,7 +17,7 @@ import java.util.List;
  **/
 
 @RestController
-@RequestMapping("/dictdata")
+@RequestMapping("/admin/dictData")
 public class SystemDictDataController {
 
     @Autowired
@@ -25,7 +25,6 @@ public class SystemDictDataController {
 
     @PostMapping("/getDictByTypes")
     public String getDictByTypes(@RequestBody List<String> param){
-
         return ResultUtil.result("success","成功",systemDictDataService.selectByTypeList(param));
 
     }

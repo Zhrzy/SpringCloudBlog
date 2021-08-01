@@ -1,8 +1,10 @@
 package com.zy.blog.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.zy.blog.base.EntityBase;
 
-public class AdminRole extends EntityBase {
+@TableName(value = "t_admin_role")
+public class AdminRole extends EntityBase<AdminRole> {
     private String adminUid;
 
     private String roleUid;

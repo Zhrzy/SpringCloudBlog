@@ -1,6 +1,7 @@
 package com.zy.blog.entity;
 
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.zy.blog.base.EntityBase;
 
 /**
@@ -8,8 +9,8 @@ import com.zy.blog.base.EntityBase;
  * 角色信息表
  * </p>
  */
-
-public class Role extends EntityBase {
+@TableName(value = "t_role")
+public class Role extends EntityBase<Role> {
 
     private static final long serialVersionUID = 1L;
 

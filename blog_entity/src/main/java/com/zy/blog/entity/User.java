@@ -1,10 +1,12 @@
 package com.zy.blog.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.zy.blog.base.EntityBase;
 
 import java.util.Date;
 
-public class User extends EntityBase {
+@TableName(value = "t_user")
+public class User extends EntityBase<User> {
     private String userName;
 
     private String passWord;

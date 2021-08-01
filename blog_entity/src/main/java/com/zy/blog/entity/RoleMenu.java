@@ -1,8 +1,10 @@
 package com.zy.blog.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.zy.blog.base.EntityBase;
 
-public class RoleMenu extends EntityBase {
+@TableName(value = "t_role_menu")
+public class RoleMenu extends EntityBase<RoleMenu> {
     private String roleUid;
 
     private String menuUid;
