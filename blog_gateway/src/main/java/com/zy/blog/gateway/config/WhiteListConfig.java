@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author zy 1716457206@qq.com
+ * @author  小章鱼 1716457206@qq.com
  */
 @Configuration
 //@ConfigurationProperties(prefix = "whitelist")
@@ -16,6 +16,11 @@ public class WhiteListConfig {
     public WhiteListConfig()  {
         urls.add("/admin/login");
         urls.add("/admin/getInfo");
+        urls.add("/web/index/getHotTag");
+        urls.add("/index/getHotTag");
+        urls.add("/web/*/**");
+        urls.add("/search/**");
+        urls.add("/picture/**");
     }
 
     public List<String> getUrls() {

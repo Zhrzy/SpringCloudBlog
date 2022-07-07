@@ -15,13 +15,12 @@ import org.springframework.util.PathMatcher;
 import reactor.core.publisher.Mono;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
- * @author zy 1716457206@qq.com
- */
-/**
- * 鉴权管理器
+ * @author  小章鱼 1716457206@qq.com
  */
 @Component
 public class AuthorizationManager implements ReactiveAuthorizationManager<AuthorizationContext> {
@@ -32,16 +31,22 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
     public AuthorizationManager (){
         permitAll.add("/");
         permitAll.add("/error");
-        permitAll.add("/favicon.ico");
-        //如果生产环境开启swagger调试
-        permitAll.add("/**/v2/api-docs/**");
-        permitAll.add("/**/swagger-resources/**");
-        permitAll.add("/webjars/**");
-        permitAll.add("/doc.html");
-        permitAll.add("/swagger-ui.html");
+        permitAll.add("/admin/admin/login");
         permitAll.add("/oauth/**");
-        permitAll.add("/admin/test/test1");
-        permitAll.add("/admin/getInfo");
+        permitAll.add("/search/**");
+        permitAll.add("/picture/**");
+//        permitAll.add("/favicon.ico");
+//        //如果生产环境开启swagger调试
+//        permitAll.add("/**/v2/api-docs/**");
+//        permitAll.add("/**/swagger-resources/**");
+//        permitAll.add("/webjars/**");
+//        permitAll.add("/doc.html");
+//        permitAll.add("/swagger-ui.html");
+//        permitAll.add("/oauth/**");
+////        permitAll.add("/admin/**");
+////        permitAll.add("/admin/getInfo");
+//        permitAll.add("/web/**");
+//        permitAll.add(("/*/**"));
     }
 
     @Override
@@ -67,12 +72,18 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
      * @return
      */
     private boolean checkAuthorities(Authentication auth, String requestPath) {
+
         if(auth instanceof Authentication){
             Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
-            return authorities.stream()
-                    .map(GrantedAuthority::getAuthority)
-                    .filter(item -> item.startsWith("ROLE_"))
-                    .anyMatch(permission -> antPathMatcher.match(permission, "ROLE_admin"));
+//            return authorities.stream()
+//                    .map(GrantedAuthority::getAuthority)
+//                    .filter(item -> item.startsWith("ROLE_"))
+//                    .anyMatch(permission -> antPathMatcher.match(permission, "ROLE_admin"));
+
+            //查询数据库 获取角色的权限
+            List<String> roleNames = authorities.stream().map(s->s.toString()).collect(Collectors.toList());
+
+            return true;
         }
         return true;
     }
