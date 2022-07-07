@@ -34,17 +34,11 @@ public class OauthUserDetailServices implements UserDetailsService {
         Admin admin = adminMapper.getUserByUsername(username);
         if (admin == null) {
             throw new UsernameNotFoundException("未找到用户");
-            //return null;
         }
-        String password= admin.getPassWord();
-        admin.setPassWord("");//密码设置为空，token中不保存密码
-        String principal = JSON.toJSONString(admin);
-        //获取角色
         List<Role> listRole = roleMapper.getRoleListByName(username);
-        String[] permissionArray = new String[listRole.size()];
         List<String> listRoleName=listRole.stream().filter(r->r!=null).map(s->s.getRoleName()).collect(Collectors.toList());
-        listRoleName.toArray(permissionArray);
-        UserDetails userDetails = User.withUsername(principal).password(password).authorities(permissionArray).build();
-        return userDetails;
+        admin.setRoleNames(listRoleName);
+
+        return SecurityUserFactory.create(admin);
     }
 }

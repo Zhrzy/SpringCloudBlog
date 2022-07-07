@@ -1,0 +1,25 @@
+###############################################################################
+#配置文件已持久化到nacos配置中心
+##############################################################################
+server:
+  port: 5555
+spring:
+  application:
+    name: blog-oauth
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 106.14.136.83:8848
+        group: ${spring.profiles.active}
+        namespace: ${spring.profiles.active}
+      config:
+        server-addr: 106.14.136.83:8848
+        file-extension: yml
+        group: ${spring.profiles.active}
+        namespace: ${spring.profiles.active}
+      username: nacos
+      password: nacos
+  main:
+    allow-bean-definition-overriding: true

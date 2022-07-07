@@ -19,20 +19,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-
     //密码编码器
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
    // TokenEndpoint
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/r/r1").hasAnyAuthority("p1")
                 .antMatchers("/login*").permitAll()
                 .antMatchers("/getPublicKey").permitAll()
+                .antMatchers("/web/*/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

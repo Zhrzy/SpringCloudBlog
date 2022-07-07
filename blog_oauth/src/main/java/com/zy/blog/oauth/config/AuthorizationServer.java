@@ -1,16 +1,14 @@
 package com.zy.blog.oauth.config;
 
-import cn.hutool.http.HttpStatus;
-import lombok.AllArgsConstructor;
+import com.zy.blog.oauth.exception.CustomClientCredentialsTokenEndpointFilter;
+import com.zy.blog.oauth.exception.ExceptionTranslator;
+import com.zy.blog.oauth.exception.OAuthServerAuthenticationEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -20,20 +18,18 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.code.AuthorizationCodeServices;
-import org.springframework.security.oauth2.provider.code.InMemoryAuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
-import org.springframework.security.web.AuthenticationEntryPoint;
 
 import javax.sql.DataSource;
 import java.util.Arrays;
 
 /**
- * @author zy 1716457206@qq.com
+ * @author  小章鱼 1716457206@qq.com
  * 授权服务器配置类
  * 配置流程：既然要完成认证，它首先得知道客户端信息从哪儿读取，因此要进行客户端详情配置。
  *          既然要颁发token，那必须得定义token的相关endpoint，以及token如何存取，以及客户端支持哪些类型的 token。
@@ -42,7 +38,6 @@ import java.util.Arrays;
 
 @Configuration
 @EnableAuthorizationServer
-
 public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
@@ -63,6 +58,9 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private OAuthServerAuthenticationEntryPoint authenticationEntryPoint;
+
 
 
     @Bean
@@ -81,8 +79,7 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
 
     @Bean
     public AuthorizationCodeServices authorizationCodeServices(DataSource dataSource) {
-
-        //return new InMemoryAuthorizationCodeServices();//设置授权码模式的授权码如何 存取，暂时采用内存方式
+        //new InMemoryAuthorizationCodeServices();//设置授权码模式的授权码如何 存取，暂时采用内存方式
         return new JdbcAuthorizationCodeServices(dataSource);//设置授权码模式的授权码如何存取
     }
 
@@ -112,13 +109,14 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
      **/
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        /*CustomClientCredentialsTokenEndpointFilter endpointFilter = new CustomClientCredentialsTokenEndpointFilter(security);
+        /*自定义客户端id或密匙错误*/
+        CustomClientCredentialsTokenEndpointFilter endpointFilter = new CustomClientCredentialsTokenEndpointFilter(security,authenticationEntryPoint);
         endpointFilter.afterPropertiesSet();
-        endpointFilter.setAuthenticationEntryPoint(authenticationEntryPoint());
-        security.addTokenEndpointAuthenticationFilter(endpointFilter);*/
+        security.addTokenEndpointAuthenticationFilter(endpointFilter);
+
         security.tokenKeyAccess("permitAll()") //当使用JwtToken且使用非对称加密时，资源服务用于获取公钥而开放的，这里指这个 endpoint完全公开
-                .checkTokenAccess("permitAll()")//checkToken这个endpoint完全公开
-                .allowFormAuthenticationForClients();//允许表单认证
+                .checkTokenAccess("permitAll()");//checkToken这个endpoint完全公开
+               //.allowFormAuthenticationForClients();//允许表单认证
 
         security.passwordEncoder(passwordEncoder);
 
@@ -127,18 +125,19 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
     /**
      * 自定义认证异常响应数据
      */
-    @Bean
-    public AuthenticationEntryPoint authenticationEntryPoint() {
-        return (request, response, e) -> {
-            response.setStatus(HttpStatus.HTTP_OK);
-            response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
-            response.setHeader("Access-Control-Allow-Origin", "*");
-            response.setHeader("Cache-Control", "no-cache");
-            /*Result result = Result.failed(ResultCode.CLIENT_AUTHENTICATION_FAILED);*/
-            response.getWriter().print("123");
-            response.getWriter().flush();
-        };
-    }
+//    @Bean
+//    public AuthenticationEntryPoint authenticationEntryPoint() {
+////        return (request, response, e) -> {
+////            response.setStatus(HttpStatus.HTTP_OK);
+////            response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
+////            response.setHeader("Access-Control-Allow-Origin", "*");
+////            response.setHeader("Cache-Control", "no-cache");
+////            /*Result result = Result.failed(ResultCode.CLIENT_AUTHENTICATION_FAILED);*/
+////            response.getWriter().print("123");
+////            response.getWriter().flush();
+////        };
+//        return new OAuthServerAuthenticationEntryPoint();
+//    }
 
 
     /**
@@ -147,7 +146,6 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
      **/
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-
         /*使用内存方式，配置客户端详情,测试用*/
         /*
         clients.inMemory()
@@ -168,7 +166,8 @@ public class AuthorizationServer extends AuthorizationServerConfigurerAdapter {
      **/
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints.authenticationManager(authenticationManager)//先认证，密码模式
+        endpoints.exceptionTranslator(new ExceptionTranslator())
+                .authenticationManager(authenticationManager)//先认证，密码模式
                 .authorizationCodeServices(authorizationCodeServices)
                 .tokenServices(tokenService())
                 .allowedTokenEndpointRequestMethods(HttpMethod.POST);

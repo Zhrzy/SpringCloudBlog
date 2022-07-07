@@ -12,7 +12,8 @@ import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 
 /**
- * @author zy 1716457206@qq.com
+ * 非对称加密公钥私钥
+ * @author  小章鱼 1716457206@qq.com
  */
 @RestController
 @RequestMapping

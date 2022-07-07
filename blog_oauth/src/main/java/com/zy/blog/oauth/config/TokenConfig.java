@@ -21,18 +21,15 @@ public class TokenConfig {
     private String SIGNING_KEY = "oauthTokenKey";
     @Bean
     public TokenStore tokenStore(){
-
         /*方式1：TokenStore 这个接口有一个默认的实现，它就是 InMemoryTokenStore*/
         //return new InMemoryTokenStore();
-
         /*方式2*/
         return new JwtTokenStore(accessTokenConverter());
-
     }
 
     @Bean
     public JwtAccessTokenConverter accessTokenConverter(){
-        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+        JwtAccessTokenConverter converter = new JwtAccessTokenEnhancer();
         //converter.setSigningKey(SIGNING_KEY); //对称秘钥，资源服务器使用该秘钥来验证
         converter.setKeyPair(keyPair());
         return  converter;
@@ -43,10 +40,8 @@ public class TokenConfig {
      */
     @Bean
     public KeyPair keyPair() {
-        KeyStoreKeyFactory factory = new KeyStoreKeyFactory(
-                new ClassPathResource("youlai.jks"), "123456".toCharArray());
-        KeyPair keyPair = factory.getKeyPair(
-                "youlai", "123456".toCharArray());
+        KeyStoreKeyFactory factory = new KeyStoreKeyFactory(new ClassPathResource("youlai.jks"), "123456".toCharArray());
+        KeyPair keyPair = factory.getKeyPair("youlai", "123456".toCharArray());
         return keyPair;
     }
 
