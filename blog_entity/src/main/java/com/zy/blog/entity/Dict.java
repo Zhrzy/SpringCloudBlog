@@ -1,128 +1,86 @@
 package com.zy.blog.entity;
 
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.zy.blog.base.EntityBase;
+import lombok.Data;
 
+/**
+ * @description:
+ * @author: 小章鱼
+ * @date: 2021/9/28 16:13
+ **/
+
+@Data
 @TableName(value = "t_sys_dict_data")
 public class Dict extends EntityBase<Dict> {
-    private Integer oid;
+    private static final long serialVersionUID = 1L;
+    /**
+     * 自增键 oid
+     */
+    private Long oid;
 
-    private String dictTypeUid;
-
+    /**
+     * 字典标签
+     */
     private String dictLabel;
 
+    /**
+     * 字典键值
+     */
     private String dictValue;
 
-    private String cssClass;
-
-    private String listClass;
-
-    private Boolean isDefault;
-
-    private String createByUid;
-
-    private String updateByUid;
-
-    private String remark;
-
-    private String isPublish;
-
+    /**
+     * 排序字段
+     */
     private Integer sort;
 
-    public Integer getOid() {
-        return oid;
-    }
+    /**
+     * 字典类型UID
+     */
+    private String dictTypeUid;
 
-    public void setOid(Integer oid) {
-        this.oid = oid;
-    }
+    /**
+     * 样式属性（其他样式扩展）
+     */
+    private String cssClass;
 
-    public String getDictTypeUid() {
-        return dictTypeUid;
-    }
+    /**
+     * 表格回显样式
+     */
+    private String listClass;
 
-    public void setDictTypeUid(String dictTypeUid) {
-        this.dictTypeUid = dictTypeUid == null ? null : dictTypeUid.trim();
-    }
+    /**
+     * 是否默认（1是 0否）,默认为0
+     */
+    private Integer isDefault;
 
-    public String getDictLabel() {
-        return dictLabel;
-    }
+    /**
+     * 是否发布  1：是，0:否，默认为0
+     */
+    private String isPublish;
 
-    public void setDictLabel(String dictLabel) {
-        this.dictLabel = dictLabel == null ? null : dictLabel.trim();
-    }
+    /**
+     * 创建人UID
+     */
+    private String createByUid;
 
-    public String getDictValue() {
-        return dictValue;
-    }
+    /**
+     * 最后更新人UID
+     */
+    private String updateByUid;
 
-    public void setDictValue(String dictValue) {
-        this.dictValue = dictValue == null ? null : dictValue.trim();
-    }
+    /**
+     * 备注
+     */
+    private String remark;
 
-    public String getCssClass() {
-        return cssClass;
-    }
+    // 以下字段不存入数据库，封装为了前端使用
 
-    public void setCssClass(String cssClass) {
-        this.cssClass = cssClass == null ? null : cssClass.trim();
-    }
-
-    public String getListClass() {
-        return listClass;
-    }
-
-    public void setListClass(String listClass) {
-        this.listClass = listClass == null ? null : listClass.trim();
-    }
-
-    public Boolean getIsDefault() {
-        return isDefault;
-    }
-
-    public void setIsDefault(Boolean isDefault) {
-        this.isDefault = isDefault;
-    }
-
-    public String getCreateByUid() {
-        return createByUid;
-    }
-
-    public void setCreateByUid(String createByUid) {
-        this.createByUid = createByUid == null ? null : createByUid.trim();
-    }
-
-    public String getUpdateByUid() {
-        return updateByUid;
-    }
-
-    public void setUpdateByUid(String updateByUid) {
-        this.updateByUid = updateByUid == null ? null : updateByUid.trim();
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
-    }
-
-    public String getIsPublish() {
-        return isPublish;
-    }
-
-    public void setIsPublish(String isPublish) {
-        this.isPublish = isPublish == null ? null : isPublish.trim();
-    }
-
-    public Integer getSort() {
-        return sort;
-    }
-
-    public void setSort(Integer sort) {
-        this.sort = sort;
-    }
+    /**
+     * 字典类型
+     */
+    @TableField(exist = false)
+    private SysDictType sysDictType;
 }

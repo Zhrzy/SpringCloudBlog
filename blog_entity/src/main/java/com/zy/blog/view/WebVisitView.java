@@ -1,75 +1,60 @@
 package com.zy.blog.view;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.zy.blog.base.ViewBase;
+import lombok.Data;
 
+@Data
 public class WebVisitView extends ViewBase {
+    /**
+     * 用户UID
+     */
     private String userUid;
 
+    /**
+     * 用户IP
+     */
     private String ip;
 
-    private String behavior;
-
-    private String moduleUid;
-
-    private String otherData;
-
+    /**
+     * 操作系统
+     */
     private String os;
 
+    /**
+     * 浏览器
+     */
     private String browser;
 
-    public String getUserUid() {
-        return userUid;
-    }
+    /**
+     * 用户访问行为   (点击了文章，点击了标签，点击了分类，进行了搜索)
+     */
+    private String behavior;
 
-    public void setUserUid(String userUid) {
-        this.userUid = userUid == null ? null : userUid.trim();
-    }
+    /**
+     * 文章uid，标签uid，分类uid
+     */
+    private String moduleUid;
 
-    public String getIp() {
-        return ip;
-    }
+    /**
+     * 附加数据(比如搜索内容)
+     */
+    private String otherData;
 
-    public void setIp(String ip) {
-        this.ip = ip == null ? null : ip.trim();
-    }
+    /**
+     * 日志时间段
+     */
+    private String startTime;
 
-    public String getBehavior() {
-        return behavior;
-    }
+    /**
+     * 内容(点击的博客名，点击的标签名，搜索的内容，点击的作者)
+     */
+    @TableField(exist = false)
+    private String content;
 
-    public void setBehavior(String behavior) {
-        this.behavior = behavior == null ? null : behavior.trim();
-    }
-
-    public String getModuleUid() {
-        return moduleUid;
-    }
-
-    public void setModuleUid(String moduleUid) {
-        this.moduleUid = moduleUid == null ? null : moduleUid.trim();
-    }
-
-    public String getOtherData() {
-        return otherData;
-    }
-
-    public void setOtherData(String otherData) {
-        this.otherData = otherData == null ? null : otherData.trim();
-    }
-
-    public String getOs() {
-        return os;
-    }
-
-    public void setOs(String os) {
-        this.os = os == null ? null : os.trim();
-    }
-
-    public String getBrowser() {
-        return browser;
-    }
-
-    public void setBrowser(String browser) {
-        this.browser = browser == null ? null : browser.trim();
-    }
+    /**
+     * 行为名称
+     */
+    @TableField(exist = false)
+    private String behaviorContent;
 }

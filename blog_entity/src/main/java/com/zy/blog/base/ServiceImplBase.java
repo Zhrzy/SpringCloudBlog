@@ -3,7 +3,7 @@ package com.zy.blog.base;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 /**
- * @author: Zy_Zhr
+ * @author: 小章鱼
  * @description:
  * @date: 2021/8/1 19:25
  **/

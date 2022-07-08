@@ -9,6 +9,7 @@ import org.springframework.web.filter.CorsFilter;
 
 public class CorsConfigurationUtil {
 
+    @Bean
     private static CorsConfiguration buildConfig() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.addAllowedOrigin("*"); // 1 设置访问源地址

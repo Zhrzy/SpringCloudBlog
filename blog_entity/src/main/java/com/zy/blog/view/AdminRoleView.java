@@ -2,6 +2,7 @@ package com.zy.blog.view;
 
 import com.zy.blog.base.ViewBase;
 
+
 public class AdminRoleView extends ViewBase {
     private String adminUid;
 

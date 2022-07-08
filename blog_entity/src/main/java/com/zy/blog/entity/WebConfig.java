@@ -1,107 +1,171 @@
 package com.zy.blog.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.zy.blog.base.EntityBase;
+import lombok.Data;
 
+import java.util.List;
+
+@Data
 @TableName(value = "t_web_config")
 public class WebConfig extends EntityBase<WebConfig> {
+    private static final long serialVersionUID = 1L;
+
+
+    /**
+     * 网站Logo
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String logo;
 
+    /**
+     * 网站名称
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String name;
 
-    private String summary;
-
-    private String keyword;
-
-    private String author;
-
-    private String recordNum;
-
-    private String startComment;
-
+    /**
+     * 标题
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String title;
 
+    /**
+     * 描述
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
+    private String summary;
+
+    /**
+     * 关键字
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
+    private String keyword;
+
+    /**
+     * 作者
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
+    private String author;
+
+    /**
+     * 备案号
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
+    private String recordNum;
+
+    /**
+     * 支付宝收款码FileId
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String aliPay;
 
+    /**
+     * 微信收款码FileId
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String weixinPay;
 
-    public String getLogo() {
-        return logo;
-    }
+    /**
+     * 友链申请模板
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
+    private String linkApplyTemplate;
 
-    public void setLogo(String logo) {
-        this.logo = logo == null ? null : logo.trim();
-    }
+    /**
+     * 是否开启网页端评论(0:否， 1:是)
+     */
+    private String openComment;
 
-    public String getName() {
-        return name;
-    }
+    /**
+     * 是否开启移动端评论(0:否， 1:是)
+     */
+    private String openMobileComment;
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
+    /**
+     * 是否开启赞赏(0:否， 1:是)
+     */
+    private String openAdmiration;
 
-    public String getSummary() {
-        return summary;
-    }
+    /**
+     * 是否开启移动端赞赏(0:否， 1:是)
+     */
+    private String openMobileAdmiration;
 
-    public void setSummary(String summary) {
-        this.summary = summary == null ? null : summary.trim();
-    }
+    /**
+     * github地址
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
+    private String github;
 
-    public String getKeyword() {
-        return keyword;
-    }
+    /**
+     * gitee地址
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
+    private String gitee;
 
-    public void setKeyword(String keyword) {
-        this.keyword = keyword == null ? null : keyword.trim();
-    }
+    /**
+     * QQ号
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
+    private String qqNumber;
 
-    public String getAuthor() {
-        return author;
-    }
+    /**
+     * QQ群
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
+    private String qqGroup;
 
-    public void setAuthor(String author) {
-        this.author = author == null ? null : author.trim();
-    }
+    /**
+     * 微信号
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
+    private String weChat;
 
-    public String getRecordNum() {
-        return recordNum;
-    }
+    /**
+     * 邮箱
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
+    private String email;
 
-    public void setRecordNum(String recordNum) {
-        this.recordNum = recordNum == null ? null : recordNum.trim();
-    }
+    /**
+     * 显示的列表（用于控制邮箱、QQ、QQ群、Github、Gitee、微信是否显示在前端）
+     */
+    private String showList;
 
-    public String getStartComment() {
-        return startComment;
-    }
+    /**
+     * 登录方式列表（用于控制前端登录方式，如账号密码,码云,Github,QQ,微信）
+     */
+    private String loginTypeList;
 
-    public void setStartComment(String startComment) {
-        this.startComment = startComment == null ? null : startComment.trim();
-    }
 
-    public String getTitle() {
-        return title;
-    }
+    // 以下字段不存入数据库，封装为了方便使用
 
-    public void setTitle(String title) {
-        this.title = title == null ? null : title.trim();
-    }
+    /**
+     * 标题图
+     */
+    @TableField(exist = false)
+    private List<String> photoList;
 
-    public String getAliPay() {
-        return aliPay;
-    }
+    /**
+     * Logo图片
+     */
+    @TableField(exist = false)
+    private String logoPhoto;
 
-    public void setAliPay(String aliPay) {
-        this.aliPay = aliPay == null ? null : aliPay.trim();
-    }
 
-    public String getWeixinPay() {
-        return weixinPay;
-    }
+    /**
+     * 支付宝付款码
+     */
+    @TableField(exist = false)
+    private String aliPayPhoto;
 
-    public void setWeixinPay(String weixinPay) {
-        this.weixinPay = weixinPay == null ? null : weixinPay.trim();
-    }
+    /**
+     * 微信付款码
+     */
+    @TableField(exist = false)
+    private String weixinPayPhoto;
+
 }

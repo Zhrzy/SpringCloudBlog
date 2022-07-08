@@ -2,96 +2,70 @@ package com.zy.blog.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.zy.blog.base.EntityBase;
+import lombok.Data;
 
+@Data
 @TableName(value = "t_sys_log")
 public class SysLog extends EntityBase<SysLog>{
+
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * 操作用户名
+     */
     private String userName;
 
+    /**
+     * 操作人uid
+     */
     private String adminUid;
 
+    /**
+     * 请求IP
+     */
     private String ip;
 
+    /**
+     * ip来源
+     */
+    private String ipSource;
+
+    /**
+     * 请求地址
+     */
     private String url;
 
+    /**
+     * 请求方式 GET POST
+     */
     private String type;
 
+    /**
+     * 请求类路径
+     */
     private String classPath;
 
+    /**
+     * 方法名
+     */
     private String method;
 
-    private String operation;
-
+    /**
+     * 参数
+     */
     private String params;
 
-    public String getUserName() {
-        return userName;
-    }
+    /**
+     * 描述
+     */
+    private String operation;
 
-    public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
-    }
+    /**
+     * 方法请求花费的时间，单位毫秒
+     */
+    private Long spendTime;
 
-    public String getAdminUid() {
-        return adminUid;
-    }
-
-    public void setAdminUid(String adminUid) {
-        this.adminUid = adminUid == null ? null : adminUid.trim();
-    }
-
-    public String getIp() {
-        return ip;
-    }
-
-    public void setIp(String ip) {
-        this.ip = ip == null ? null : ip.trim();
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url == null ? null : url.trim();
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type == null ? null : type.trim();
-    }
-
-    public String getClassPath() {
-        return classPath;
-    }
-
-    public void setClassPath(String classPath) {
-        this.classPath = classPath == null ? null : classPath.trim();
-    }
-
-    public String getMethod() {
-        return method;
-    }
-
-    public void setMethod(String method) {
-        this.method = method == null ? null : method.trim();
-    }
-
-    public String getOperation() {
-        return operation;
-    }
-
-    public void setOperation(String operation) {
-        this.operation = operation == null ? null : operation.trim();
-    }
-
-    public String getParams() {
-        return params;
-    }
-
-    public void setParams(String params) {
-        this.params = params == null ? null : params.trim();
-    }
 }

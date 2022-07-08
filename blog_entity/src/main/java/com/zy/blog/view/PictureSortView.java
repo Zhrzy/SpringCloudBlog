@@ -1,45 +1,36 @@
 package com.zy.blog.view;
 
 import com.zy.blog.base.ViewBase;
+import com.zy.blog.utils.annotion.validator.annotion.IntegerNotNull;
+import com.zy.blog.utils.annotion.validator.group.Insert;
+import com.zy.blog.utils.annotion.validator.group.Update;
+import lombok.Data;
 
+@Data
 public class PictureSortView extends ViewBase {
-    private String fileUid;
-
-    private String name;
-
+    /**
+     * 父UID
+     */
     private String parentUid;
 
-    private Integer sort;
+    /**
+     * 分类名
+     */
+    private String name;
 
-    public String getFileUid() {
-        return fileUid;
-    }
+    /**
+     * 分类图片Uid
+     */
+    private String fileUid;
 
-    public void setFileUid(String fileUid) {
-        this.fileUid = fileUid == null ? null : fileUid.trim();
-    }
+    /**
+     * 排序字段，数值越大，越靠前
+     */
+    private int sort;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
-
-    public String getParentUid() {
-        return parentUid;
-    }
-
-    public void setParentUid(String parentUid) {
-        this.parentUid = parentUid == null ? null : parentUid.trim();
-    }
-
-    public Integer getSort() {
-        return sort;
-    }
-
-    public void setSort(Integer sort) {
-        this.sort = sort;
-    }
+    /**
+     * 是否显示  1: 是  0: 否
+     */
+    @IntegerNotNull(groups = {Insert.class, Update.class})
+    private Integer isShow;
 }

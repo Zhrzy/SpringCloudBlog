@@ -2,11 +2,11 @@ package com.zy.blog.base;
 
 /**
  * @description: 表现层基类对象
- * @author: ZhangY_ZXY
+ * @author: 小章鱼
  * @create: 2021-07-28 22:02
  **/
 
-public class ViewBase {
+public class ViewBase<T> extends Page<T> {
 
     public String uid;
 

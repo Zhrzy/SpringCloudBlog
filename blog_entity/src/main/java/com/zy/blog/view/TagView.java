@@ -1,35 +1,38 @@
 package com.zy.blog.view;
 
 import com.zy.blog.base.ViewBase;
+import com.zy.blog.utils.annotion.validator.annotion.NotBlank;
+import com.zy.blog.utils.annotion.validator.group.Insert;
+import com.zy.blog.utils.annotion.validator.group.Update;
+import lombok.Data;
 
+@Data
 public class TagView extends ViewBase {
+    /**
+     * 标签内容
+     */
+    @NotBlank(groups = {Insert.class, Update.class})
     private String content;
 
-    private Integer clickCount;
-
+    /**
+     * 排序字段
+     */
     private Integer sort;
 
-    public String getContent() {
-        return content;
-    }
+    /**
+     * OrderBy排序字段（desc: 降序）
+     */
+    private String orderByDescColumn;
 
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
-    }
+    /**
+     * OrderBy排序字段（asc: 升序）
+     */
+    private String orderByAscColumn;
 
-    public Integer getClickCount() {
-        return clickCount;
-    }
+    /**
+     * 无参构造方法，初始化默认值
+     */
+    TagView() {
 
-    public void setClickCount(Integer clickCount) {
-        this.clickCount = clickCount;
-    }
-
-    public Integer getSort() {
-        return sort;
-    }
-
-    public void setSort(Integer sort) {
-        this.sort = sort;
     }
 }

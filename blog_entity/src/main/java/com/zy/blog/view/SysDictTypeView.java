@@ -1,85 +1,54 @@
 package com.zy.blog.view;
 
 import com.zy.blog.base.ViewBase;
+import com.zy.blog.utils.annotion.validator.annotion.*;
+import com.zy.blog.utils.annotion.validator.group.*;
+import lombok.Data;
 
+@Data
 public class SysDictTypeView extends ViewBase {
-    private Integer oid;
 
+    /**
+     * 自增键 oid
+     */
+    private Long oid;
+
+    /**
+     * 字典名称
+     */
+    @NotBlank(groups = {Insert.class, Update.class})
     private String dictName;
 
+    /**
+     * 字典类型
+     */
+    @NotBlank(groups = {Insert.class, Update.class})
     private String dictType;
 
-    private String createByUid;
-
-    private String updateByUid;
-
-    private String remark;
-
+    /**
+     * 是否发布  1：是，0:否，默认为0
+     */
+    @NotBlank(groups = {Insert.class, Update.class})
     private String isPublish;
 
+    /**
+     * 备注
+     */
+    private String remark;
+
+    /**
+     * 排序字段
+     */
+    @IntegerNotNull(groups = {Insert.class, Update.class})
     private Integer sort;
 
-    public Integer getOid() {
-        return oid;
-    }
+    /**
+     * OrderBy排序字段（desc: 降序）
+     */
+    private String orderByDescColumn;
 
-    public void setOid(Integer oid) {
-        this.oid = oid;
-    }
-
-    public String getDictName() {
-        return dictName;
-    }
-
-    public void setDictName(String dictName) {
-        this.dictName = dictName == null ? null : dictName.trim();
-    }
-
-    public String getDictType() {
-        return dictType;
-    }
-
-    public void setDictType(String dictType) {
-        this.dictType = dictType == null ? null : dictType.trim();
-    }
-
-    public String getCreateByUid() {
-        return createByUid;
-    }
-
-    public void setCreateByUid(String createByUid) {
-        this.createByUid = createByUid == null ? null : createByUid.trim();
-    }
-
-    public String getUpdateByUid() {
-        return updateByUid;
-    }
-
-    public void setUpdateByUid(String updateByUid) {
-        this.updateByUid = updateByUid == null ? null : updateByUid.trim();
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
-    }
-
-    public String getIsPublish() {
-        return isPublish;
-    }
-
-    public void setIsPublish(String isPublish) {
-        this.isPublish = isPublish == null ? null : isPublish.trim();
-    }
-
-    public Integer getSort() {
-        return sort;
-    }
-
-    public void setSort(Integer sort) {
-        this.sort = sort;
-    }
+    /**
+     * OrderBy排序字段（asc: 升序）
+     */
+    private String orderByAscColumn;
 }

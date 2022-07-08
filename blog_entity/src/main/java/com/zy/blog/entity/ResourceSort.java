@@ -1,66 +1,51 @@
 package com.zy.blog.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.zy.blog.base.EntityBase;
+import lombok.Data;
+
+import java.util.List;
+
+/**
+ * @description:
+ * @author: 小章鱼
+ * @date: 2021/9/28 16:13
+ **/
+@Data
 @TableName(value = "t_resource_sort")
 public class ResourceSort extends EntityBase<ResourceSort> {
-    private String fileUid;
+    private static final long serialVersionUID = 1L;
 
+
+    /**
+     * 分类名
+     */
     private String sortName;
 
+    /**
+     * 分类介绍
+     */
     private String content;
 
+    /**
+     * 分类图片UID
+     */
+    private String fileUid;
+
+    /**
+     * 分类点击数
+     */
     private String clickCount;
 
-    private String parentUid;
+    /**
+     * 排序字段，数值越大，越靠前
+     */
+    private int sort;
 
-    private Integer sort;
-
-    public String getFileUid() {
-        return fileUid;
-    }
-
-    public void setFileUid(String fileUid) {
-        this.fileUid = fileUid == null ? null : fileUid.trim();
-    }
-
-    public String getSortName() {
-        return sortName;
-    }
-
-    public void setSortName(String sortName) {
-        this.sortName = sortName == null ? null : sortName.trim();
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
-    }
-
-    public String getClickCount() {
-        return clickCount;
-    }
-
-    public void setClickCount(String clickCount) {
-        this.clickCount = clickCount == null ? null : clickCount.trim();
-    }
-
-    public String getParentUid() {
-        return parentUid;
-    }
-
-    public void setParentUid(String parentUid) {
-        this.parentUid = parentUid == null ? null : parentUid.trim();
-    }
-
-    public Integer getSort() {
-        return sort;
-    }
-
-    public void setSort(Integer sort) {
-        this.sort = sort;
-    }
+    /**
+     * 分类图
+     */
+    @TableField(exist = false)
+    private List<String> photoList;
 }

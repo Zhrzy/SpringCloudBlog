@@ -1,189 +1,155 @@
 package com.zy.blog.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zy.blog.base.EntityBase;
+import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
+@Data
 @TableName(value = "t_user")
 public class User extends EntityBase<User> {
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * 用户名
+     */
     private String userName;
 
+    /**
+     * 密码
+     */
     private String passWord;
 
-    private Boolean gender;
-
-    private String avatar;
-
-    private String email;
-
-    private Date birthday;
-
-    private String mobile;
-
-    private String validCode;
-
-    private String summary;
-
-    private Integer loginCount;
-
-    private Date lastLoginTime;
-
-    private String lastLoginIp;
-
+    /**
+     * 昵称
+     */
     private String nickName;
 
-    private String source;
+    /**
+     * 性别(1:男2:女)
+     */
+    private String gender;
 
-    private String uuid;
+    /**
+     * 个人头像(UID)
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
+    private String avatar;
 
+    /**
+     * 邮箱
+     */
+    private String email;
+
+    /**
+     * 出生年月日
+     */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date birthday;
+
+    /**
+     * 手机
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
+    private String mobile;
+
+    /**
+     * QQ号
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String qqNumber;
 
+    /**
+     * 微信号
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String weChat;
 
+    /**
+     * 职业
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String occupation;
 
-    public String getUserName() {
-        return userName;
-    }
+    /**
+     * 自我简介最多150字
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
+    private String summary;
 
-    public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
-    }
+    /**
+     * 登录次数
+     */
+    private Integer loginCount;
 
-    public String getPassWord() {
-        return passWord;
-    }
+    /**
+     * 验证码
+     */
+    private String validCode;
 
-    public void setPassWord(String passWord) {
-        this.passWord = passWord == null ? null : passWord.trim();
-    }
+    /**
+     * 资料来源
+     */
+    private String source;
 
-    public Boolean getGender() {
-        return gender;
-    }
+    /**
+     * 平台uuid
+     */
+    private String uuid;
 
-    public void setGender(Boolean gender) {
-        this.gender = gender;
-    }
+    /**
+     * 最后登录时间
+     */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date lastLoginTime;
 
-    public String getAvatar() {
-        return avatar;
-    }
+    /**
+     * 最后登录IP
+     */
+    private String lastLoginIp;
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar == null ? null : avatar.trim();
-    }
+    /**
+     * 评论状态，0 禁言， 1 正常
+     */
+    private Integer commentStatus;
 
-    public String getEmail() {
-        return email;
-    }
+    /**
+     * 开启邮件通知：  0：关闭， 1：开启
+     */
+    private Integer startEmailNotification;
 
-    public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
-    }
+    /**
+     * 操作系统
+     */
+    private String os;
 
-    public Date getBirthday() {
-        return birthday;
-    }
+    /**
+     * 浏览器
+     */
+    private String browser;
 
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
+    /**
+     * ip来源
+     */
+    private String ipSource;
 
-    public String getMobile() {
-        return mobile;
-    }
+    /**
+     * 用户标签  0：普通，1：管理员，2：博主
+     */
+    private Integer userTag;
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile == null ? null : mobile.trim();
-    }
+    // 以下字段不存入数据库
 
-    public String getValidCode() {
-        return validCode;
-    }
-
-    public void setValidCode(String validCode) {
-        this.validCode = validCode == null ? null : validCode.trim();
-    }
-
-    public String getSummary() {
-        return summary;
-    }
-
-    public void setSummary(String summary) {
-        this.summary = summary == null ? null : summary.trim();
-    }
-
-    public Integer getLoginCount() {
-        return loginCount;
-    }
-
-    public void setLoginCount(Integer loginCount) {
-        this.loginCount = loginCount;
-    }
-
-    public Date getLastLoginTime() {
-        return lastLoginTime;
-    }
-
-    public void setLastLoginTime(Date lastLoginTime) {
-        this.lastLoginTime = lastLoginTime;
-    }
-
-    public String getLastLoginIp() {
-        return lastLoginIp;
-    }
-
-    public void setLastLoginIp(String lastLoginIp) {
-        this.lastLoginIp = lastLoginIp == null ? null : lastLoginIp.trim();
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName == null ? null : nickName.trim();
-    }
-
-    public String getSource() {
-        return source;
-    }
-
-    public void setSource(String source) {
-        this.source = source == null ? null : source.trim();
-    }
-
-    public String getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid == null ? null : uuid.trim();
-    }
-
-    public String getQqNumber() {
-        return qqNumber;
-    }
-
-    public void setQqNumber(String qqNumber) {
-        this.qqNumber = qqNumber == null ? null : qqNumber.trim();
-    }
-
-    public String getWeChat() {
-        return weChat;
-    }
-
-    public void setWeChat(String weChat) {
-        this.weChat = weChat == null ? null : weChat.trim();
-    }
-
-    public String getOccupation() {
-        return occupation;
-    }
-
-    public void setOccupation(String occupation) {
-        this.occupation = occupation == null ? null : occupation.trim();
-    }
+    /**
+     * 用户头像
+     */
+    @TableField(exist = false)
+    private String photoUrl;
 }

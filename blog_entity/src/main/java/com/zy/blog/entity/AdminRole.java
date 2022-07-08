@@ -1,27 +1,24 @@
 package com.zy.blog.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.zy.blog.base.EntityBase;
+import lombok.Data;
 
+/**
+ * @description:
+ * @author: 小章鱼
+ * @date: 2021/9/28 16:13
+ **/
+@Data
 @TableName(value = "t_admin_role")
 public class AdminRole extends EntityBase<AdminRole> {
-    private String adminUid;
 
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
+    private String adminUid;
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String roleUid;
 
-    public String getAdminUid() {
-        return adminUid;
-    }
 
-    public void setAdminUid(String adminUid) {
-        this.adminUid = adminUid == null ? null : adminUid.trim();
-    }
-
-    public String getRoleUid() {
-        return roleUid;
-    }
-
-    public void setRoleUid(String roleUid) {
-        this.roleUid = roleUid == null ? null : roleUid.trim();
-    }
 }

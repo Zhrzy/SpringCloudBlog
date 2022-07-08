@@ -2,36 +2,25 @@ package com.zy.blog.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.zy.blog.base.EntityBase;
+import lombok.Data;
 
+@Data
 @TableName(value = "t_todo")
 public class Todo extends EntityBase<Todo> {
-    private String adminUid;
+    private static final long serialVersionUID = 1L;
 
+    /**
+     * 内容
+     */
     private String text;
 
+    /**
+     * 管理员UID
+     */
+    private String adminUid;
+
+    /**
+     * 表示事项是否完成
+     */
     private Boolean done;
-
-    public String getAdminUid() {
-        return adminUid;
-    }
-
-    public void setAdminUid(String adminUid) {
-        this.adminUid = adminUid == null ? null : adminUid.trim();
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text == null ? null : text.trim();
-    }
-
-    public Boolean getDone() {
-        return done;
-    }
-
-    public void setDone(Boolean done) {
-        this.done = done;
-    }
 }

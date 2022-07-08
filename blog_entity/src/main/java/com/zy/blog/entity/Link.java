@@ -1,57 +1,70 @@
 package com.zy.blog.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.zy.blog.base.EntityBase;
+import lombok.Data;
 
+import java.util.List;
+
+@Data
 @TableName(value = "t_link")
 public class Link extends EntityBase<Link> {
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * 友链标题
+     */
     private String title;
 
+    /**
+     * 友链介绍
+     */
     private String summary;
 
+    /**
+     * 友链地址
+     */
     private String url;
 
+    /**
+     * 友链状态： 0 申请中， 1：上线  2: 已下架
+     */
+    private Integer linkStatus;
+
+    /**
+     * 点击数
+     */
     private Integer clickCount;
 
+    /**
+     * 排序字段
+     */
     private Integer sort;
 
-    public String getTitle() {
-        return title;
-    }
+    /**
+     * 管理员UID
+     */
+    private String adminUid;
 
-    public void setTitle(String title) {
-        this.title = title == null ? null : title.trim();
-    }
+    /**
+     * 申请用户Uid
+     */
+    private String userUid;
 
-    public String getSummary() {
-        return summary;
-    }
+    /**
+     * 站长邮箱
+     */
+    private String email;
 
-    public void setSummary(String summary) {
-        this.summary = summary == null ? null : summary.trim();
-    }
+    /**
+     * 网站图标uid
+     */
+    private String fileUid;
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url == null ? null : url.trim();
-    }
-
-    public Integer getClickCount() {
-        return clickCount;
-    }
-
-    public void setClickCount(Integer clickCount) {
-        this.clickCount = clickCount;
-    }
-
-    public Integer getSort() {
-        return sort;
-    }
-
-    public void setSort(Integer sort) {
-        this.sort = sort;
-    }
+    /**
+     * 网站图标URL 【该字段不存入数据库】
+     */
+    @TableField(exist = false)
+    private List<String> photoList;
 }

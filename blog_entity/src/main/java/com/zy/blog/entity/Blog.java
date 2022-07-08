@@ -1,147 +1,169 @@
 package com.zy.blog.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.zy.blog.base.EntityBase;
+import lombok.Data;
 
+import java.util.List;
+
+/**
+ * @description:
+ * @author: 小章鱼
+ * @date: 2021/9/28 16:13
+ **/
+@Data
 @TableName(value = "t_blog")
 public class Blog extends EntityBase<Blog> {
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * 唯一oid【自动递增】
+     */
+    private Integer oid;
+
+    /**
+     * 博客标题
+     */
     private String title;
 
+    /**
+     * 博客简介
+     * updateStrategy = FieldStrategy.IGNORED ：表示更新时候忽略非空判断
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String summary;
 
-    private String tagUid;
-
-    private Integer clickCount;
-
-    private Integer collectCount;
-
-    private String fileUid;
-
-    private String adminUid;
-
-    private String isOriginal;
-
-    private String author;
-
-    private String articlesPart;
-
-    private String blogSortUid;
-
-    private Boolean level;
-
-    private String isPublish;
-
+    /**
+     * 博客内容
+     */
     private String content;
 
-    public String getTitle() {
-        return title;
-    }
+    /**
+     * 标签uid
+     */
+    private String tagUid;
 
-    public void setTitle(String title) {
-        this.title = title == null ? null : title.trim();
-    }
+    /**
+     * 博客分类UID
+     */
+    private String blogSortUid;
 
-    public String getSummary() {
-        return summary;
-    }
+    /**
+     * 博客点击数
+     */
+    private Integer clickCount;
 
-    public void setSummary(String summary) {
-        this.summary = summary == null ? null : summary.trim();
-    }
+    /**
+     * 博客收藏数
+     */
+    private Integer collectCount;
 
-    public String getTagUid() {
-        return tagUid;
-    }
+    /**
+     * 标题图片UID
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
+    private String fileUid;
 
-    public void setTagUid(String tagUid) {
-        this.tagUid = tagUid == null ? null : tagUid.trim();
-    }
+    /**
+     * 管理员UID
+     */
+    private String adminUid;
 
-    public Integer getClickCount() {
-        return clickCount;
-    }
+    /**
+     * 是否发布
+     */
+    private String isPublish;
 
-    public void setClickCount(Integer clickCount) {
-        this.clickCount = clickCount;
-    }
+    /**
+     * 是否原创
+     */
+    private String isOriginal;
 
-    public Integer getCollectCount() {
-        return collectCount;
-    }
+    /**
+     * 如果原创，作者为管理员名
+     */
+    private String author;
 
-    public void setCollectCount(Integer collectCount) {
-        this.collectCount = collectCount;
-    }
+    /**
+     * 文章出处
+     */
+    private String articlesPart;
 
-    public String getFileUid() {
-        return fileUid;
-    }
+    /**
+     * 推荐级别，用于首页推荐
+     * 0：正常
+     * 1：一级推荐(轮播图)
+     * 2：二级推荐(top)
+     * 3：三级推荐 ()
+     * 4：四级 推荐 (特别推荐)
+     */
+    private Integer level;
 
-    public void setFileUid(String fileUid) {
-        this.fileUid = fileUid == null ? null : fileUid.trim();
-    }
+    /**
+     * 排序字段，数值越大，越靠前
+     */
+    private Integer sort;
 
-    public String getAdminUid() {
-        return adminUid;
-    }
+    /**
+     * 是否开启评论(0:否， 1:是)
+     */
+    private String openComment;
 
-    public void setAdminUid(String adminUid) {
-        this.adminUid = adminUid == null ? null : adminUid.trim();
-    }
+    /**
+     * 文章类型【0 博客， 1：推广】
+     */
+    private String type;
 
-    public String getIsOriginal() {
-        return isOriginal;
-    }
+    /**
+     * 外链【如果是推广，那么将跳转到外链】
+     */
+    private String outsideLink;
 
-    public void setIsOriginal(String isOriginal) {
-        this.isOriginal = isOriginal == null ? null : isOriginal.trim();
-    }
 
-    public String getAuthor() {
-        return author;
-    }
+    // 以下字段不存入数据库，封装为了方便使用
 
-    public void setAuthor(String author) {
-        this.author = author == null ? null : author.trim();
-    }
+    /**
+     * 标签,一篇博客对应多个标签
+     */
+    @TableField(exist = false)
+    private List<Tag> tagList;
 
-    public String getArticlesPart() {
-        return articlesPart;
-    }
+    /**
+     * 标题图
+     */
+    @TableField(exist = false)
+    private List<String> photoList;
 
-    public void setArticlesPart(String articlesPart) {
-        this.articlesPart = articlesPart == null ? null : articlesPart.trim();
-    }
+    /**
+     * 博客分类
+     */
+    @TableField(exist = false)
+    private BlogSort blogSort;
 
-    public String getBlogSortUid() {
-        return blogSortUid;
-    }
+    /**
+     * 博客分类名
+     */
+    @TableField(exist = false)
+    private String blogSortName;
 
-    public void setBlogSortUid(String blogSortUid) {
-        this.blogSortUid = blogSortUid == null ? null : blogSortUid.trim();
-    }
+    /**
+     * 博客标题图
+     */
+    @TableField(exist = false)
+    private String photoUrl;
 
-    public Boolean getLevel() {
-        return level;
-    }
+    /**
+     * 点赞数
+     */
+    @TableField(exist = false)
+    private Integer praiseCount;
 
-    public void setLevel(Boolean level) {
-        this.level = level;
-    }
+    /**
+     * 版权申明
+     */
+    @TableField(exist = false)
+    private String copyright;
 
-    public String getIsPublish() {
-        return isPublish;
-    }
-
-    public void setIsPublish(String isPublish) {
-        this.isPublish = isPublish == null ? null : isPublish.trim();
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
-    }
 }

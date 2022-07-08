@@ -1,18 +1,23 @@
 package com.zy.blog.entity;
 
 
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.zy.blog.base.EntityBase;
+import lombok.Data;
 
 /**
  * <p>
  * 角色信息表
  * </p>
  */
+
 @TableName(value = "t_role")
 public class Role extends EntityBase<Role> {
 
     private static final long serialVersionUID = 1L;
+
 
     /**
      * 角色名称
@@ -22,11 +27,13 @@ public class Role extends EntityBase<Role> {
     /**
      * 介绍
      */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String summary;
 
     /**
-     * 该角色所能操作的菜单uid
+     * 该角色所能管辖的区域
      */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String categoryMenuUids;
 
     public static long getSerialVersionUID() {

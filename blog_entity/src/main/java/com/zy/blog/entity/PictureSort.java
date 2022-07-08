@@ -1,46 +1,56 @@
 package com.zy.blog.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.zy.blog.base.EntityBase;
+import lombok.Data;
+
+import java.util.List;
+
+/**
+ * @description:
+ * @author: 小章鱼
+ * @date: 2021/9/28 16:13
+ **/
+@Data
 @TableName(value = "t_picture_sort")
 public class PictureSort extends EntityBase<PictureSort> {
-    private String fileUid;
 
-    private String name;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 3454006152368184626L;
 
+    /**
+     * 父UID
+     */
     private String parentUid;
 
-    private Integer sort;
+    /**
+     * 分类名
+     */
+    private String name;
 
-    public String getFileUid() {
-        return fileUid;
-    }
+    /**
+     * 分类图片Uid
+     */
+    private String fileUid;
 
-    public void setFileUid(String fileUid) {
-        this.fileUid = fileUid == null ? null : fileUid.trim();
-    }
+    /**
+     * 排序字段，数值越大，越靠前
+     */
+    private int sort;
 
-    public String getName() {
-        return name;
-    }
+    /**
+     * 是否显示  1: 是  0: 否
+     */
+    private Integer isShow;
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
+    //以下字段不存入数据库
 
-    public String getParentUid() {
-        return parentUid;
-    }
-
-    public void setParentUid(String parentUid) {
-        this.parentUid = parentUid == null ? null : parentUid.trim();
-    }
-
-    public Integer getSort() {
-        return sort;
-    }
-
-    public void setSort(Integer sort) {
-        this.sort = sort;
-    }
+    /**
+     * 分类图
+     */
+    @TableField(exist = false)
+    private List<String> photoList;
 }

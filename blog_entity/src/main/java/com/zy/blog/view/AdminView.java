@@ -1,197 +1,103 @@
 package com.zy.blog.view;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zy.blog.base.ViewBase;
+import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
-public class AdminView extends ViewBase {
+@Data
+public class AdminView extends ViewBase<AdminView> {
+    /**
+     * 用户名
+     */
     private String userName;
 
+    /**
+     * 密码
+     */
     private String passWord;
 
-    private String gender;
-
-    private String avatar;
-
-    private String email;
-
-    private Date birthday;
-
-    private String mobile;
-
-    private String validCode;
-
-    private String summary;
-
-    private Integer loginCount;
-
-    private Date lastLoginTime;
-
-    private String lastLoginIp;
-
+    /**
+     * 昵称
+     */
     private String nickName;
 
+    /**
+     * 性别(1:男2:女)
+     */
+    private String gender;
+
+    /**
+     * 个人头像
+     */
+    private String avatar;
+
+    /**
+     * 邮箱
+     */
+    private String email;
+
+    /**
+     * 出生年月日
+     */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date birthday;
+
+    /**
+     * 手机
+     */
+    private String mobile;
+
+    /**
+     * QQ号
+     */
     private String qqNumber;
 
+    /**
+     * 微信号
+     */
     private String weChat;
 
+    /**
+     * 职业
+     */
     private String occupation;
 
+    /**
+     * 自我简介最多150字
+     */
+    private String summary;
+
+    /**
+     * 个人履历
+     */
+    private String personResume;
+
+    /**
+     * github地址
+     */
     private String github;
 
+    /**
+     * gitee地址
+     */
     private String gitee;
 
+    /**
+     * 角色Uid
+     */
     private String roleUid;
 
-    public String getUserName() {
-        return userName;
-    }
+    /**
+     * 已用网盘容量
+     */
+    private Long storageSize;
 
-    public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
-    }
-
-    public String getPassWord() {
-        return passWord;
-    }
-
-    public void setPassWord(String passWord) {
-        this.passWord = passWord == null ? null : passWord.trim();
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender == null ? null : gender.trim();
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar == null ? null : avatar.trim();
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
-    }
-
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile == null ? null : mobile.trim();
-    }
-
-    public String getValidCode() {
-        return validCode;
-    }
-
-    public void setValidCode(String validCode) {
-        this.validCode = validCode == null ? null : validCode.trim();
-    }
-
-    public String getSummary() {
-        return summary;
-    }
-
-    public void setSummary(String summary) {
-        this.summary = summary == null ? null : summary.trim();
-    }
-
-    public Integer getLoginCount() {
-        return loginCount;
-    }
-
-    public void setLoginCount(Integer loginCount) {
-        this.loginCount = loginCount;
-    }
-
-    public Date getLastLoginTime() {
-        return lastLoginTime;
-    }
-
-    public void setLastLoginTime(Date lastLoginTime) {
-        this.lastLoginTime = lastLoginTime;
-    }
-
-    public String getLastLoginIp() {
-        return lastLoginIp;
-    }
-
-    public void setLastLoginIp(String lastLoginIp) {
-        this.lastLoginIp = lastLoginIp == null ? null : lastLoginIp.trim();
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName == null ? null : nickName.trim();
-    }
-
-    public String getQqNumber() {
-        return qqNumber;
-    }
-
-    public void setQqNumber(String qqNumber) {
-        this.qqNumber = qqNumber == null ? null : qqNumber.trim();
-    }
-
-    public String getWeChat() {
-        return weChat;
-    }
-
-    public void setWeChat(String weChat) {
-        this.weChat = weChat == null ? null : weChat.trim();
-    }
-
-    public String getOccupation() {
-        return occupation;
-    }
-
-    public void setOccupation(String occupation) {
-        this.occupation = occupation == null ? null : occupation.trim();
-    }
-
-    public String getGithub() {
-        return github;
-    }
-
-    public void setGithub(String github) {
-        this.github = github == null ? null : github.trim();
-    }
-
-    public String getGitee() {
-        return gitee;
-    }
-
-    public void setGitee(String gitee) {
-        this.gitee = gitee == null ? null : gitee.trim();
-    }
-
-    public String getRoleUid() {
-        return roleUid;
-    }
-
-    public void setRoleUid(String roleUid) {
-        this.roleUid = roleUid == null ? null : roleUid.trim();
-    }
+    /**
+     * 最大网盘容量
+     */
+    private Long maxStorageSize;
 }

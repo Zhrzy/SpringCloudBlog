@@ -2,15 +2,17 @@ package com.zy.blog.utils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import jdk.internal.dynalink.beans.StaticClass;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 /**
- * @author zy 1716457206@qq.com
+ * @author  小章鱼 1716457206@qq.com
  */
 public class JsonUtils {
 
-    /** @Author zy
+    private static final ObjectMapper objectMapper = new ObjectMapper();
+
+    /** @author  小章鱼
      * @Description //对象转json
      * @Param [obj]
      * @return java.lang.String
@@ -32,5 +34,16 @@ public class JsonUtils {
         if (str==null) str="";
         JSONObject jsonObject =JSON.parseObject(str);
         return jsonObject;
+    }
+
+
+    public static <T> T jsonToObj(String json,Class<T> Class){
+        try {
+            T t = objectMapper.readValue(json, Class);
+            return t;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

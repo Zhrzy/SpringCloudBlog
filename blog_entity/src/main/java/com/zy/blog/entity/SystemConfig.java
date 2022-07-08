@@ -1,287 +1,174 @@
 package com.zy.blog.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.zy.blog.base.EntityBase;
+import lombok.Data;
 
 @TableName(value = "t_system_config")
+@Data
 public class SystemConfig extends EntityBase<SystemConfig> {
-    private int iconType;
 
+    private static final long serialVersionUID = 1L;
+
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
+    private int iconType;
+    /**
+     * 七牛云公钥
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String qiNiuAccessKey;
 
+    /**
+     * 七牛云私钥
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String qiNiuSecretKey;
 
-    private String email;
-
-    private String emailUserName;
-
-    private String emailPassword;
-
-    private String smtpAddress;
-
-    private String smtpPort;
-
+    /**
+     * 七牛云上传空间
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String qiNiuBucket;
 
+    /**
+     * 七牛云存储区域 华东（z0），华北(z1)，华南(z2)，北美(na0)，东南亚(as0)
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String qiNiuArea;
 
-    private String uploadQiNiu;
-
-    private String uploadLocal;
-
-    private String picturePriority;
-
-    private String qiNiuPictureBaseUrl;
-
-    private String localPictureBaseUrl;
-
-    private String startEmailNotification;
-
-    private Boolean editorModel;
-
-    private String themeColor;
-
+    /**
+     * Minio远程连接地址
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String minioEndPoint;
 
+    /**
+     * Minio公钥
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String minioAccessKey;
 
+    /**
+     * Minio私钥
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String minioSecretKey;
 
+    /**
+     * Minio桶
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String minioBucket;
 
-    private Boolean uploadMinio;
+    /**
+     * 图片是否上传七牛云 (0:否， 1：是)
+     */
+    private String uploadQiNiu;
 
+    /**
+     * 图片是否上传本地存储 (0:否， 1：是)
+     */
+    private String uploadLocal;
+
+    /**
+     * 文件是否上传Minio (0:否， 1：是)
+     */
+    private String uploadMinio;
+
+    /**
+     * 标题图片显示优先级（ 0:本地  1: 七牛云 2: Minio）
+     */
+    private String picturePriority;
+
+    /**
+     * 博客详情图片显示优先级（ 0:本地  1: 七牛云 2: Minio）
+     */
+    private String contentPicturePriority;
+
+    /**
+     * 本地存储图片服务器，域名前缀:   http://localhost:8600
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
+    private String localPictureBaseUrl;
+
+    /**
+     * 七牛云存储图片服务器，域名前缀: http://images.moguit.cn
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
+    private String qiNiuPictureBaseUrl;
+
+    /**
+     * Minio服务器文件域名前缀： http://minio.moguit.cn
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String minioPictureBaseUrl;
 
-    private Boolean openDashboardNotification;
+    /**
+     * 邮箱账号
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
+    private String email;
 
-    private Boolean contentPicturePriority;
+    /**
+     * 邮箱发件人用户名
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
+    private String emailUserName;
 
-    private Boolean openEmailActivate;
+    /**
+     * 邮箱密码
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
+    private String emailPassword;
 
+    /**
+     * SMTP地址
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
+    private String smtpAddress;
+
+    /**
+     * SMTP端口
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
+    private String smtpPort;
+
+    /**
+     * 是否开启邮件通知(0:否， 1:是)
+     * 当有新的反馈，首先需要在系统管理处设置接收通知的邮箱
+     */
+    private String startEmailNotification;
+
+    /**
+     * 编辑器模式，(0：富文本编辑器CKEditor，1：markdown编辑器Veditor)
+     */
+    private String editorModel;
+
+    /**
+     * 主题颜色
+     */
+    private String themeColor;
+
+    /**
+     * 仪表盘通知【首次进入时弹出】
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String dashboardNotification;
 
-    public int getIconType() {
-        return iconType;
-    }
+    /**
+     * 是否开启仪表盘通知【0 关闭，1 开启】
+     */
+    private String openDashboardNotification;
 
-    public void setIconType(int iconType) {
-        this.iconType = iconType;
-    }
+    /**
+     * 是否开启用户邮件激活功能【0 关闭，1 开启】
+     */
+    private String openEmailActivate;
 
-    public String getQiNiuAccessKey() {
-        return qiNiuAccessKey;
-    }
-
-    public void setQiNiuAccessKey(String qiNiuAccessKey) {
-        this.qiNiuAccessKey = qiNiuAccessKey == null ? null : qiNiuAccessKey.trim();
-    }
-
-    public String getQiNiuSecretKey() {
-        return qiNiuSecretKey;
-    }
-
-    public void setQiNiuSecretKey(String qiNiuSecretKey) {
-        this.qiNiuSecretKey = qiNiuSecretKey == null ? null : qiNiuSecretKey.trim();
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
-    }
-
-    public String getEmailUserName() {
-        return emailUserName;
-    }
-
-    public void setEmailUserName(String emailUserName) {
-        this.emailUserName = emailUserName == null ? null : emailUserName.trim();
-    }
-
-    public String getEmailPassword() {
-        return emailPassword;
-    }
-
-    public void setEmailPassword(String emailPassword) {
-        this.emailPassword = emailPassword == null ? null : emailPassword.trim();
-    }
-
-    public String getSmtpAddress() {
-        return smtpAddress;
-    }
-
-    public void setSmtpAddress(String smtpAddress) {
-        this.smtpAddress = smtpAddress == null ? null : smtpAddress.trim();
-    }
-
-    public String getSmtpPort() {
-        return smtpPort;
-    }
-
-    public void setSmtpPort(String smtpPort) {
-        this.smtpPort = smtpPort == null ? null : smtpPort.trim();
-    }
-
-    public String getQiNiuBucket() {
-        return qiNiuBucket;
-    }
-
-    public void setQiNiuBucket(String qiNiuBucket) {
-        this.qiNiuBucket = qiNiuBucket == null ? null : qiNiuBucket.trim();
-    }
-
-    public String getQiNiuArea() {
-        return qiNiuArea;
-    }
-
-    public void setQiNiuArea(String qiNiuArea) {
-        this.qiNiuArea = qiNiuArea == null ? null : qiNiuArea.trim();
-    }
-
-    public String getUploadQiNiu() {
-        return uploadQiNiu;
-    }
-
-    public void setUploadQiNiu(String uploadQiNiu) {
-        this.uploadQiNiu = uploadQiNiu == null ? null : uploadQiNiu.trim();
-    }
-
-    public String getUploadLocal() {
-        return uploadLocal;
-    }
-
-    public void setUploadLocal(String uploadLocal) {
-        this.uploadLocal = uploadLocal == null ? null : uploadLocal.trim();
-    }
-
-    public String getPicturePriority() {
-        return picturePriority;
-    }
-
-    public void setPicturePriority(String picturePriority) {
-        this.picturePriority = picturePriority == null ? null : picturePriority.trim();
-    }
-
-    public String getQiNiuPictureBaseUrl() {
-        return qiNiuPictureBaseUrl;
-    }
-
-    public void setQiNiuPictureBaseUrl(String qiNiuPictureBaseUrl) {
-        this.qiNiuPictureBaseUrl = qiNiuPictureBaseUrl == null ? null : qiNiuPictureBaseUrl.trim();
-    }
-
-    public String getLocalPictureBaseUrl() {
-        return localPictureBaseUrl;
-    }
-
-    public void setLocalPictureBaseUrl(String localPictureBaseUrl) {
-        this.localPictureBaseUrl = localPictureBaseUrl == null ? null : localPictureBaseUrl.trim();
-    }
-
-    public String getStartEmailNotification() {
-        return startEmailNotification;
-    }
-
-    public void setStartEmailNotification(String startEmailNotification) {
-        this.startEmailNotification = startEmailNotification == null ? null : startEmailNotification.trim();
-    }
-
-    public Boolean getEditorModel() {
-        return editorModel;
-    }
-
-    public void setEditorModel(Boolean editorModel) {
-        this.editorModel = editorModel;
-    }
-
-    public String getThemeColor() {
-        return themeColor;
-    }
-
-    public void setThemeColor(String themeColor) {
-        this.themeColor = themeColor == null ? null : themeColor.trim();
-    }
-
-    public String getMinioEndPoint() {
-        return minioEndPoint;
-    }
-
-    public void setMinioEndPoint(String minioEndPoint) {
-        this.minioEndPoint = minioEndPoint == null ? null : minioEndPoint.trim();
-    }
-
-    public String getMinioAccessKey() {
-        return minioAccessKey;
-    }
-
-    public void setMinioAccessKey(String minioAccessKey) {
-        this.minioAccessKey = minioAccessKey == null ? null : minioAccessKey.trim();
-    }
-
-    public String getMinioSecretKey() {
-        return minioSecretKey;
-    }
-
-    public void setMinioSecretKey(String minioSecretKey) {
-        this.minioSecretKey = minioSecretKey == null ? null : minioSecretKey.trim();
-    }
-
-    public String getMinioBucket() {
-        return minioBucket;
-    }
-
-    public void setMinioBucket(String minioBucket) {
-        this.minioBucket = minioBucket == null ? null : minioBucket.trim();
-    }
-
-    public Boolean getUploadMinio() {
-        return uploadMinio;
-    }
-
-    public void setUploadMinio(Boolean uploadMinio) {
-        this.uploadMinio = uploadMinio;
-    }
-
-    public String getMinioPictureBaseUrl() {
-        return minioPictureBaseUrl;
-    }
-
-    public void setMinioPictureBaseUrl(String minioPictureBaseUrl) {
-        this.minioPictureBaseUrl = minioPictureBaseUrl == null ? null : minioPictureBaseUrl.trim();
-    }
-
-    public Boolean getOpenDashboardNotification() {
-        return openDashboardNotification;
-    }
-
-    public void setOpenDashboardNotification(Boolean openDashboardNotification) {
-        this.openDashboardNotification = openDashboardNotification;
-    }
-
-    public Boolean getContentPicturePriority() {
-        return contentPicturePriority;
-    }
-
-    public void setContentPicturePriority(Boolean contentPicturePriority) {
-        this.contentPicturePriority = contentPicturePriority;
-    }
-
-    public Boolean getOpenEmailActivate() {
-        return openEmailActivate;
-    }
-
-    public void setOpenEmailActivate(Boolean openEmailActivate) {
-        this.openEmailActivate = openEmailActivate;
-    }
-
-    public String getDashboardNotification() {
-        return dashboardNotification;
-    }
-
-    public void setDashboardNotification(String dashboardNotification) {
-        this.dashboardNotification = dashboardNotification == null ? null : dashboardNotification.trim();
-    }
+    /**
+     * 搜索模式：0:SQL搜索 、1：全文检索
+     */
+    private String searchModel;
 }

@@ -2,57 +2,36 @@ package com.zy.blog.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.zy.blog.base.EntityBase;
+import lombok.Data;
 
 import java.util.Date;
+@Data
 @TableName(value = "t_visitor")
 public class Visitor extends EntityBase<Visitor> {
-    private String userName;
+    private static final long serialVersionUID = 1L;
 
+    /**
+     * 用户名
+     */
+    private String user_name;
+
+    /**
+     * 邮箱
+     */
     private String email;
 
-    private Integer loginCount;
+    /**
+     * 登录次数
+     */
+    private Integer login_count;
 
-    private Date lastLoginTime;
+    /**
+     * 最后登录时间
+     */
+    private Date last_login_time;
 
-    private String lastLoginIp;
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
-    }
-
-    public Integer getLoginCount() {
-        return loginCount;
-    }
-
-    public void setLoginCount(Integer loginCount) {
-        this.loginCount = loginCount;
-    }
-
-    public Date getLastLoginTime() {
-        return lastLoginTime;
-    }
-
-    public void setLastLoginTime(Date lastLoginTime) {
-        this.lastLoginTime = lastLoginTime;
-    }
-
-    public String getLastLoginIp() {
-        return lastLoginIp;
-    }
-
-    public void setLastLoginIp(String lastLoginIp) {
-        this.lastLoginIp = lastLoginIp == null ? null : lastLoginIp.trim();
-    }
+    /**
+     * 最后登录IP
+     */
+    private String last_login_ip;
 }

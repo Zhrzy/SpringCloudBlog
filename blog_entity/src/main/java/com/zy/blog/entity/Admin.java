@@ -1,7 +1,12 @@
 package com.zy.blog.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldStrategy;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zy.blog.base.EntityBase;
+import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.List;
@@ -9,11 +14,12 @@ import java.util.List;
 /**
  * 管理员表
  */
-
+@Data
 @TableName(value = "t_admin")
 public class Admin extends EntityBase<Admin> {
 
 
+    private static final long serialVersionUID = 1L;
 
     /**
      * 用户名
@@ -33,6 +39,7 @@ public class Admin extends EntityBase<Admin> {
     /**
      * 昵称
      */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String nickName;
 
     /**
@@ -43,42 +50,58 @@ public class Admin extends EntityBase<Admin> {
     /**
      * 个人头像
      */
+//    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String avatar;
 
     /**
      * 邮箱
      */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String email;
 
     /**
      * 出生年月日
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date birthday;
 
     /**
      * 手机
+     * updateStrategy = FieldStrategy.IGNORED ：表示更新时候忽略非空判断
      */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String mobile;
 
     /**
      * QQ号
      */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String qqNumber;
 
     /**
      * 微信号
      */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String weChat;
 
     /**
      * 职业
      */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String occupation;
 
     /**
      * 自我简介最多150字
      */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String summary;
+
+    /**
+     * 个人履历（Markdown）
+     */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
+    private String personResume;
 
     /**
      * 登录次数
@@ -88,6 +111,8 @@ public class Admin extends EntityBase<Admin> {
     /**
      * 最后登录时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date lastLoginTime;
 
     /**
@@ -98,11 +123,13 @@ public class Admin extends EntityBase<Admin> {
     /**
      * github地址
      */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String github;
 
     /**
      * gitee地址
      */
+    @TableField(updateStrategy = FieldStrategy.IGNORED)
     private String gitee;
 
     // 以下字段不存入数据库
@@ -110,237 +137,42 @@ public class Admin extends EntityBase<Admin> {
     /**
      * 用户头像
      */
+    @TableField(exist = false)
     private List<String> photoList;
 
     /**
      * 所拥有的角色名
      */
+    @TableField(exist = false)
     private List<String> roleNames;
 
     /**
      * 所拥有的角色名
      */
+    @TableField(exist = false)
     private Role role;
 
     /**
      * 验证码
      */
+    @TableField(exist = false)
     private String validCode;
 
+    /**
+     * 已用网盘容量
+     */
+    @TableField(exist = false)
+    private Long storageSize;
 
-    public String getUserName() {
-        return userName;
-    }
+    /**
+     * 最大网盘容量
+     */
+    @TableField(exist = false)
+    private Long maxStorageSize;
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getRoleUid() {
-        return roleUid;
-    }
-
-    public void setRoleUid(String roleUid) {
-        this.roleUid = roleUid;
-    }
-
-    public String getPassWord() {
-        return passWord;
-    }
-
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
-    public String getQqNumber() {
-        return qqNumber;
-    }
-
-    public void setQqNumber(String qqNumber) {
-        this.qqNumber = qqNumber;
-    }
-
-    public String getWeChat() {
-        return weChat;
-    }
-
-    public void setWeChat(String weChat) {
-        this.weChat = weChat;
-    }
-
-    public String getOccupation() {
-        return occupation;
-    }
-
-    public void setOccupation(String occupation) {
-        this.occupation = occupation;
-    }
-
-    public String getSummary() {
-        return summary;
-    }
-
-    public void setSummary(String summary) {
-        this.summary = summary;
-    }
-
-    public Integer getLoginCount() {
-        return loginCount;
-    }
-
-    public void setLoginCount(Integer loginCount) {
-        this.loginCount = loginCount;
-    }
-
-    public Date getLastLoginTime() {
-        return lastLoginTime;
-    }
-
-    public void setLastLoginTime(Date lastLoginTime) {
-        this.lastLoginTime = lastLoginTime;
-    }
-
-    public String getLastLoginIp() {
-        return lastLoginIp;
-    }
-
-    public void setLastLoginIp(String lastLoginIp) {
-        this.lastLoginIp = lastLoginIp;
-    }
-
-    public String getGithub() {
-        return github;
-    }
-
-    public void setGithub(String github) {
-        this.github = github;
-    }
-
-    public String getGitee() {
-        return gitee;
-    }
-
-    public void setGitee(String gitee) {
-        this.gitee = gitee;
-    }
-
-    public List<String> getPhotoList() {
-        return photoList;
-    }
-
-    public void setPhotoList(List<String> photoList) {
-        this.photoList = photoList;
-    }
-
-    public List<String> getRoleNames() {
-        return roleNames;
-    }
-
-    public void setRoleNames(List<String> roleNames) {
-        this.roleNames = roleNames;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public String getValidCode() {
-        return validCode;
-    }
-
-    public void setValidCode(String validCode) {
-        this.validCode = validCode;
-    }
-
-    @Override
-    public String getUid() {
-        return super.getUid();
-    }
-
-    @Override
-    public void setUid(String uid) {
-        super.setUid(uid);
-    }
-
-    @Override
-    public int getStatus() {
-        return super.getStatus();
-    }
-
-    @Override
-    public void setStatus(int status) {
-        super.setStatus(status);
-    }
-
-    @Override
-    public Date getCreateTime() {
-        return super.getCreateTime();
-    }
-
-    @Override
-    public void setCreateTime(Date createTime) {
-        super.setCreateTime(createTime);
-    }
-
-    @Override
-    public Date getUpdateTime() {
-        return super.getUpdateTime();
-    }
-
-    @Override
-    public void setUpdateTime(Date updateTime) {
-        super.setUpdateTime(updateTime);
-    }
+    /**
+     * 令牌UID【主要用于换取token令牌，防止token直接暴露到在线用户管理中】
+     */
+    @TableField(exist = false)
+    private String tokenUid;
 }
