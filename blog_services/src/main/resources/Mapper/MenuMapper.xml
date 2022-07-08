@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.zy.blog.service.mapper.MenuMapper">
+
+    <!-- <insert id="create" parameterType="Payment" useGeneratedKeys="true" keyProperty="id">
+         insert into payment(serial)  values(#{serial});
+     </insert>
+     <resultMap id="BaseResultMap" type="com.atguigu.springcloud.entities.Payment">
+         <id column="id" property="id" jdbcType="BIGINT"/>
+         <id column="serial" property="serial" jdbcType="VARCHAR"/>
+     </resultMap>
+     <select id="getPaymentById" parameterType="Long" resultMap="BaseResultMap">
+         select * from payment where id=#{id};
+     </select>-->
+    <!--定义Admin的ResultMap-->
+    <resultMap id="MenuMap" type="com.zy.blog.entity.Menu">
+        <id column="uid" property="uid" javaType="String"/>
+        <id column="name" property="name" javaType="String"/>
+        <id column="menu_level" property="menuLevel" javaType="Integer"/>
+        <id column="summary" property="summary" javaType="String"/>
+        <id column="parentUid" property="parent_uid" javaType="String"/>
+        <id column="url" property="url" javaType="String"/>
+        <id column="icon" property="icon" javaType="String"/>
+        <id column="sort" property="sort" javaType="Integer"/>
+        <id column="status" property="status" javaType="Integer"/>
+        <id column="create_time" property="createTime" javaType="java.sql.Timestamp"/>
+        <id column="update_time" property="updateTime" javaType="java.sql.Timestamp"/>
+    </resultMap>
+    <select id="getRouterList" resultMap="MenuMap" >
+        select * from t_category_menu m
+                          left join t_role_menu rm
+                                    on rm.menu_uid= m.uid
+                          left join t_admin_role ar
+                                    on rm.role_uid = ar.role_uid
+        where ar.admin_uid=#{arg0};
+    </select>
+
+</mapper>
