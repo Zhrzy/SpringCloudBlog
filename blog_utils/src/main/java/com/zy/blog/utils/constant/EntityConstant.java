@@ -1,7 +1,7 @@
-package com.zy.blog.constant;
+package com.zy.blog.utils.constant;
 
 /**
- * @author: Zy_Zhr
+ * @author: 小章鱼
  * @description: 数据实体常量  对用数据表的字段名
  * @date: 2021/8/1 20:59
  **/

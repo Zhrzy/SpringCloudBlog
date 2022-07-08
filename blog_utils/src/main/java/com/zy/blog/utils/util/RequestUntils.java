@@ -1,13 +1,13 @@
-package com.zy.blog.utils;
+package com.zy.blog.utils.util;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import com.zy.blog.constant.AuthConstants;
+import com.zy.blog.utils.constant.AuthConstants;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 /**
- * @author zy 1716457206@qq.com
+ * @author  小章鱼 1716457206@qq.com
  */
 public class RequestUntils {
 
