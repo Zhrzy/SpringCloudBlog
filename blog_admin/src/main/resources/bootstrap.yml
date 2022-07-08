@@ -1,0 +1,56 @@
+###############################################################################
+#配置文件已持久化到nacos配置中心
+##############################################################################
+server:
+  port: 5001
+spring:
+  application:
+    name: blog-admin
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 106.14.136.83:8848
+        group: ${spring.profiles.active}
+        namespace: ${spring.profiles.active}
+      config:
+        server-addr: 106.14.136.83:8848
+        file-extension: yml
+        group: ${spring.profiles.active}
+        namespace: ${spring.profiles.active}
+      username: nacos
+      password: nacos
+    sentinel:
+      transport:
+        dashboard: localhost:9999
+        port: 9999
+      enabled: true
+      #sentinel与nacos 实现持久化
+      datasource:
+        #限流规则
+        flow:
+          nacos:
+            # nacos连接地址
+            server-addr: ${spring.cloud.nacos.discovery.server-addr}
+            # nacos中的配置名称 配置ID
+            data-id: ${spring.application.name}-flow-rules
+            ## 配置分组，默认是DEFAULT_GROUP
+            group-id: DEFAULT_GROUP
+            ## 配置存储的格式
+            data-type: json
+            ## rule-type设置对应得规则类型，总共七大类型，在com.alibaba.cloud.sentinel.datasource.RuleType这个枚举类中有体现
+            rule-type: flow
+            username: ${spring.cloud.nacos.username}
+            password: ${spring.cloud.nacos.password}
+        #降级规则
+        degrade:
+          nacos:
+            ## nacos的地址
+            server-addr: ${spring.cloud.nacos.discovery.server-addr}
+            data-id: ${spring.application.name}-degrade-rules
+            group-id: DEFAULT_GROUP
+            data-type: json
+            rule-type: degrade
+            username: ${spring.cloud.nacos.username}
+            password: ${spring.cloud.nacos.password}

@@ -1,6 +1,8 @@
 package com.zy.blog.admin.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -13,18 +15,23 @@ import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
 import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 
-/*
+/**
 * 资源服务器配置
-*
+*  @author 小章鱼
+ * @date 2021年01月1日
 * */
 @Configuration
 @EnableResourceServer
+@RefreshScope
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     public static final String RESOURCE_ID="res1";
 
     @Autowired
     private TokenStore tokenStore;
+
+    @Value("${blogconfig.cktokenurl}")
+    private String ckTokenUrl;
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
@@ -54,7 +61,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         // 资源服务器通过 HTTP 请求来解码令牌，每次都请求授权服务器端点 /oauth/check_token
         // 使用授权服务的 /oauth/check_token 端点你需要在授权服务将这个端点暴露出去，以便资源服务可以进行访问
         RemoteTokenServices service=new RemoteTokenServices(); //使用远程服务
-        service.setCheckTokenEndpointUrl("http://localhost:5555/oauth/check_token");
+        service.setCheckTokenEndpointUrl(ckTokenUrl);
         service.setClientId("c1");
         service.setClientSecret("secret");
         return service;

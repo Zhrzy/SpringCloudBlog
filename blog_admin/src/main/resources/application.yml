@@ -1,33 +1,6 @@
-server:
-  port: 5001
-
+###############################################################################
+#配置文件已持久化到nacos配置中心
+##############################################################################
 spring:
-  application:
-    name: blog-admin
-  cloud:
-    nacos:
-      discovery:
-        server-addr: 106.14.136.83:8848
-  datasource:
-    type: com.alibaba.druid.pool.DruidDataSource           # 当前数据源操作类型
-    driver-class-name: org.gjt.mm.mysql.Driver         # mysql驱动包
-    url: jdbc:mysql://rm-uf6ea0i13i88ck5ecyo.mysql.rds.aliyuncs.com:3306/mogu_blog?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&useSSL=false&serverTimezone=GMT%2B8&autoReconnect=true&failOverReadOnly=false
-    username: zy
-    password: zhangyong123##
-
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-
-#整合mybatis
-mybatis:
-  mapper-locations: classpath:Mapper/*.xml
-  config-location: classpath:mybatis/mybatis.cfg.xml
-  type-aliases-package: com.zy.blog.entity
-
-mybatis-plus:
-  mapper-locations: classpath:Mapper/*.xml
-  type-aliases-package: com.zy.blog.entity
+  profiles:
+    active: dev
