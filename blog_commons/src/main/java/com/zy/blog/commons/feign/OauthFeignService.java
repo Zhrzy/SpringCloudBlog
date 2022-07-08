@@ -1,6 +1,6 @@
-package com.zy.blog.admin.feign;
+package com.zy.blog.commons.feign;
 
-import org.springframework.cloud.openfeign.EnableFeignClients;
+import com.zy.blog.commons.fallback.OauthFeignServiceFallback;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.util.MultiValueMap;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Component
-@FeignClient(value = "blog-oauth")
+@FeignClient(value = "blog-oauth",fallback = OauthFeignServiceFallback.class)
 public interface OauthFeignService {
 
     @RequestMapping(method = RequestMethod.POST, value = "/oauth/token")
