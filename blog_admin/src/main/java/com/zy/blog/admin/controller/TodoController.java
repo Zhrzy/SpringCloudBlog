@@ -59,17 +59,6 @@ public class TodoController {
         
     }
 
-    @OperationLogger(value = "编辑代办事项")
-    @ApiOperation(value = "编辑代办事项", notes = "编辑代办事项", response = String.class)
-    @PostMapping("/edit")
-    public String edit(HttpServletRequest request, @Validated({Update.class}) @RequestBody TodoView TodoView, BindingResult result) {
-
-        // 参数校验
-        ThrowableUtils.checkParamArgument(result);
-        return todoService.editTodo(TodoView);
-        
-    }
-
     @OperationLogger(value = "删除代办事项")
     @ApiOperation(value = "删除代办事项", notes = "删除代办事项", response = String.class)
     @PostMapping("/delete")
@@ -78,14 +67,25 @@ public class TodoController {
         // 参数校验
         ThrowableUtils.checkParamArgument(result);
         return todoService.deleteTodo(TodoView);
-        
+
     }
+
+    @OperationLogger(value = "编辑代办事项")
+    @ApiOperation(value = "编辑代办事项", notes = "编辑代办事项", response = String.class)
+    @PostMapping("/edit")
+    public String edit(HttpServletRequest request, @Validated({Update.class}) @RequestBody TodoView TodoView, BindingResult result) {
+
+        // 参数校验
+        ThrowableUtils.checkParamArgument(result);
+        return todoService.editTodo(TodoView);
+    }
+
+
 
     @OperationLogger(value = "批量编辑代办事项")
     @ApiOperation(value = "批量编辑代办事项", notes = "批量编辑代办事项", response = String.class)
     @PostMapping("/toggleAll")
     public String toggleAll(HttpServletRequest request, @Validated({GetOne.class}) @RequestBody TodoView TodoView, BindingResult result) {
-
         // 参数校验
         ThrowableUtils.checkParamArgument(result);
         return todoService.editBatchTodo(TodoView);

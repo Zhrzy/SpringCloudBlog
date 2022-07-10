@@ -63,7 +63,7 @@ public class CategoryMenuController {
     }
 
 
-    @OperationLogger(value = "增加菜单")
+    @OperationLogger(value = "编辑菜单")
     @PostMapping("/edit")
     public String edit(@Validated({Update.class}) @RequestBody CategoryMenuView categoryMenuVO, BindingResult result) {
         // 参数校验

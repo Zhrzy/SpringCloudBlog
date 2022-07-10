@@ -53,16 +53,7 @@ public class TagController {
         return tagService.addTag(tagVO);
     }
 
-    @OperationLogger(value = "编辑标签")
-    @ApiOperation(value = "编辑标签", notes = "编辑标签", response = String.class)
-    @PostMapping("/edit")
-    public String edit(@Validated({Update.class}) @RequestBody TagView tagVO, BindingResult result) {
 
-        // 参数校验
-        ThrowableUtils.checkParamArgument(result);
-        log.info("编辑标签");
-        return tagService.editTag(tagVO);
-    }
 
     @OperationLogger(value = "批量删除标签")
     @ApiOperation(value = "批量删除标签", notes = "批量删除标签", response = String.class)
@@ -73,6 +64,17 @@ public class TagController {
         ThrowableUtils.checkParamArgument(result);
         log.info("批量删除标签");
         return tagService.deleteBatchTag(tagVoList);
+    }
+
+    @OperationLogger(value = "编辑标签")
+    @ApiOperation(value = "编辑标签", notes = "编辑标签", response = String.class)
+    @PostMapping("/edit")
+    public String edit(@Validated({Update.class}) @RequestBody TagView tagVO, BindingResult result) {
+
+        // 参数校验
+        ThrowableUtils.checkParamArgument(result);
+        log.info("编辑标签");
+        return tagService.editTag(tagVO);
     }
 
     @OperationLogger(value = "置顶标签")
