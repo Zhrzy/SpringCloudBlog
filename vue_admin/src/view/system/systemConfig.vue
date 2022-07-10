@@ -6,7 +6,7 @@
         <el-form style="margin-left: 20px;" label-position="left"   label-width="140px" >
 
           <aside>
-            通过开关选择博客编辑时的文本编辑器，以及文件显示方式<br/>
+            通过开关调整系统配置<br/>
           </aside>
 
           <el-form-item label="封面图片显示优先级">
@@ -95,59 +95,6 @@
         </el-form>
       </el-tab-pane>
 
-      <el-tab-pane name="four"  v-permission="'/systemConfig/getSystemConfig'">
-        <span slot="label">
-          <i class="el-icon-date"></i> 七牛云对象存储
-        </span>
-
-        <el-form
-          style="margin-left: 20px;"
-          label-position="left"
-          :model="form"
-          label-width="120px"
-          :rules="rules"
-          ref="form"
-        >
-          <aside>
-            使用 <a href="https://www.moguit.cn/info/202">七牛云</a> 构建对象存储服务<br/>
-          </aside>
-
-          <el-form-item label="七牛云文件域名" prop="qiNiuPictureBaseUrl">
-            <el-input v-model="form.qiNiuPictureBaseUrl" auto-complete="new-password" style="width: 400px"></el-input>
-          </el-form-item>
-
-          <el-form-item label="七牛云公钥">
-            <el-input v-model="form.qiNiuAccessKey" auto-complete="new-password" style="width: 400px"></el-input>
-          </el-form-item>
-
-          <el-form-item label="七牛云私钥">
-            <el-input type="password" v-model="form.qiNiuSecretKey" auto-complete="new-password" style="width: 400px"></el-input>
-          </el-form-item>
-
-          <el-form-item label="上传空间">
-            <el-input  v-model="form.qiNiuBucket" style="width: 400px"></el-input>
-          </el-form-item>
-
-          <el-form-item label="存储区域">
-            <el-select v-model="form.qiNiuArea" placeholder="请选择存储区域" clearable>
-              <el-option v-for="item in areaDictList"
-                         :key="item.dictValue"
-                         :label="item.dictLabel"
-                         :value="item.dictValue"></el-option>
-            </el-select>
-          </el-form-item>
-
-          <el-form-item label="文件上传七牛云">
-            <el-radio v-for="item in yesNoDictList" :key="item.uid" v-model="form.uploadQiNiu" :label="item.dictValue" border size="medium">{{item.dictLabel}}</el-radio>
-          </el-form-item>
-
-          <el-form-item>
-            <el-button type="primary" @click="submitForm()" v-permission="'/systemConfig/editSystemConfig'">保 存</el-button>
-          </el-form-item>
-
-        </el-form>
-      </el-tab-pane>
-
       <el-tab-pane name="five" v-permission="'/systemConfig/getSystemConfig'">
         <span slot="label">
           <i class="el-icon-date"></i> Minio对象存储
@@ -163,7 +110,7 @@
         >
 
           <aside>
-            使用 <a href="https://www.moguit.cn/info/278">Minio</a> 构建本地对象存储服务<br/>
+            使用 Minio 构建本地对象存储服务<br/>
           </aside>
 
           <el-form-item label="Minio访问域名" prop="localPictureBaseUrl">
@@ -203,7 +150,7 @@
 
           <aside>
             邮箱配置主要用于配置网站消息的接收<br/>
-            例如：友链申请、网站评论、网站反馈等，可以在系统配置处选择是否开启邮件通知<br/>
+            例如：网站评论等，可以在系统配置处选择是否开启邮件通知<br/>
           </aside>
 
           <el-form-item label="邮箱" prop="email">
@@ -238,7 +185,6 @@
 
           <aside>
             Redis管理主要用于清空一些缓存数据<br/>
-            用户首次部署时，可以使用清空全部，把Redis中的缓存一键清空<br/>
           </aside>
 
           <el-form-item label="全部">

@@ -204,7 +204,7 @@ export const asyncRoutes = [
           path: 'pictureSort',
           name: '图片类别管理',
           component: () => import('@/view/picture/pictureSort'),
-          meta: { title: '图片类别管理1', icon: 'picture',elementICon:'el-icon-picture-outline' }
+          meta: { title: '图片类别管理', icon: 'picture',elementICon:'el-icon-picture-outline' }
         },
         {
           path: 'picture',

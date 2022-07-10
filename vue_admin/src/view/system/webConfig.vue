@@ -89,98 +89,11 @@
       </el-tab-pane>
 
 
-      <el-tab-pane v-permission="'/webConfig/getWebConfig'">
-        <span slot="label">
-          <i class="el-icon-date"></i> 评论&打赏
-        </span>
-
-        <el-form
-          style="margin-left: 20px;"
-          label-position="left"
-          :model="form"
-          label-width="90px"
-          ref="from"
-        >
-
-          <el-row :gutter="24">
-            <el-col :span="4">
-              <el-form-item label="阿里支付">
-                <el-upload
-                  class="avatar-uploader"
-                  name="file"
-                  :action="uploadPictureHost"
-                  :file-list="fileList"
-                  :show-file-list="false"
-                  :before-upload="beforeUpload"
-                  :on-success="fileSuccess_ali"
-                  :data="otherData"
-                >
-                  <img v-if="form.aliPayPhoto" :src="form.aliPayPhoto" class="avatar">
-                  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                </el-upload>
-              </el-form-item>
-            </el-col>
-            <el-col :span="4">
-              <el-form-item label="微信支付">
-                <el-upload
-                  class="avatar-uploader"
-                  name="file"
-                  :action="uploadPictureHost"
-                  :file-list="fileList"
-                  :show-file-list="false"
-                  :before-upload="beforeUpload"
-                  :on-success="fileSuccess_weixin"
-                  :data="otherData"
-                >
-                  <img v-if="form.weixinPayPhoto" :src="form.weixinPayPhoto" class="avatar">
-                  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                </el-upload>
-              </el-form-item>
-            </el-col>
-          </el-row>
-
-          <el-row :gutter="24">
-            <el-col :span="6">
-              <el-form-item label="网站评论">
-                <el-radio v-for="item in openDictList" :key="item.uid" v-model="form.openComment" :label="item.dictValue" border size="medium">{{item.dictLabel}}</el-radio>
-              </el-form-item>
-            </el-col>
-          </el-row>
-
-          <el-row :gutter="24">
-            <el-col :span="6">
-              <el-form-item label="网站打赏">
-                <el-radio v-for="item in openDictList" :key="item.uid" v-model="form.openAdmiration" :label="item.dictValue" border size="medium">{{item.dictLabel}}</el-radio>
-              </el-form-item>
-            </el-col>
-          </el-row>
-
-          <el-row :gutter="24">
-            <el-col :span="6">
-              <el-form-item label="移动端评论">
-                <el-radio v-for="item in openDictList" :key="item.uid" v-model="form.openMobileComment" :label="item.dictValue" border size="medium">{{item.dictLabel}}</el-radio>
-              </el-form-item>
-            </el-col>
-          </el-row>
-
-          <el-row :gutter="24">
-            <el-col :span="6">
-              <el-form-item label="移动端打赏">
-                <el-radio v-for="item in openDictList" :key="item.uid" v-model="form.openMobileAdmiration" :label="item.dictValue" border size="medium">{{item.dictLabel}}</el-radio>
-              </el-form-item>
-            </el-col>
-          </el-row>
-
-          <el-form-item>
-            <el-button type="primary" @click="submitForm()" v-permission="'/webConfig/editWebConfig'">保 存</el-button>
-          </el-form-item>
-        </el-form>
-
-      </el-tab-pane>
+     
 
       <el-tab-pane v-permission="'/webConfig/getWebConfig'">
         <span slot="label">
-          <i class="el-icon-date"></i> 关注我们
+          <i class="el-icon-date"></i> 联系我
         </span>
 
         <el-form
@@ -203,20 +116,15 @@
             <el-checkbox label="2" style="margin-left: 10px">在首页显示</el-checkbox>
           </el-form-item>
 
-          <el-form-item label="QQ群" prop="qqGroup">
-            <el-input v-model="form.qqGroup" style="width: 400px"></el-input>
-            <el-checkbox label="3" style="margin-left: 10px">在首页显示</el-checkbox>
-          </el-form-item>
-
           <el-form-item label="github" prop="github">
             <el-input v-model="form.github" style="width: 400px"></el-input>
             <el-checkbox label="4" style="margin-left: 10px">在首页显示</el-checkbox>
           </el-form-item>
 
-          <el-form-item label="Gitee" prop="gitee">
+          <!-- <el-form-item label="Gitee" prop="gitee">
             <el-input v-model="form.gitee" style="width: 400px"></el-input>
             <el-checkbox label="5" style="margin-left: 10px">在首页显示</el-checkbox>
-          </el-form-item>
+          </el-form-item> -->
 
           <el-form-item label="微信" prop="weChat">
             <el-input v-model="form.weChat" style="width: 400px"></el-input>
@@ -232,16 +140,7 @@
         </el-form>
       </el-tab-pane>
 
-      <el-tab-pane label="友链申请模板" v-permission="'/webConfig/getWebConfig'">
-        <span slot="label"><i class="el-icon-edit"></i> 友链申请模板</span>
-        <div class="editor-container">
-          <CKEditor ref="editor" v-if="systemConfig.editorModel == '0'" :content="form.linkApplyTemplate" :height="500"></CKEditor>
-          <MarkdownEditor ref="editor" v-if="systemConfig.editorModel == '1'" :height="660" style="margin-top: 12px"></MarkdownEditor>
-        </div>
-        <div style="margin-top: 5px; margin-left: 10px;" >
-          <el-button type="primary" @click="submitForm()" v-permission="'/system/editMe'">保 存</el-button>
-        </div>
-      </el-tab-pane>
+     
 
     </el-tabs>
 
@@ -264,8 +163,7 @@ import { getWebConfig, editWebConfig } from "@/api/webConfig";
 import { Loading } from 'element-ui';
 import {getListByDictType} from "@/api/sysDictData"
 import { getSystemConfig} from "@/api/systemConfig";
-import CKEditor from "@/components/CKEditor";
-import MarkdownEditor from "@/components/MarkdownEditor";
+
 
 export default {
   data() {
@@ -331,8 +229,6 @@ export default {
   },
   components: {
     CheckPhoto,
-    CKEditor,
-    MarkdownEditor
   },
   created() {
     // 获取配置

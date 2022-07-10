@@ -7,7 +7,7 @@
       <nav>
         <div class="logo">
           <router-link to="/">
-            <a href="javascript:void(0);" v-if="info.name">{{info.name}}</a>
+            <a href="javascript:void(0);" v-if="info.name">章鱼博客</a>
           </router-link>
         </div>
 
@@ -43,14 +43,6 @@
               <a v-if="webNavbar.isJumpExternalUrl == 1" :href="webNavbar.url" target="_blank" :class="[saveTitle == webNavbar.url ? 'title' : '']">{{ webNavbar.name }}</a>
             </span>
           </li>
-
-          <!--        <li>-->
-          <!--          <router-link to="/">-->
-          <!--            <a href="javascript:void(0);" :class="[saveTitle == '/' ? 'title' : '']">首页</a>-->
-          <!--          </router-link>-->
-          <!--        </li>-->
-
-
         </ul>
 
         <div class="searchbox">
