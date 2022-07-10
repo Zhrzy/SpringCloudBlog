@@ -249,7 +249,7 @@
           </el-col>
 
           <el-col :span="8">
-            <el-form-item label="标题图1" :label-width="formLabelWidth">
+            <el-form-item label="标题图" :label-width="formLabelWidth">
               <div class="imgBody" v-if="form.photoList">
                 <i
                   class="el-icon-error inputClass"

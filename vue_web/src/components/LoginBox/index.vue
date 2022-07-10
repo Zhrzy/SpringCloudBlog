@@ -36,7 +36,7 @@
         </div>
 
 
-       <el-row class="elRow">
+       <!-- <el-row class="elRow">
           <el-tooltip content="码云" placement="bottom">
             <el-button type="danger" circle @click="goAuth('gitee')" :disabled="loginType.gitee">
               <span class="iconfont">&#xe602;</span>
@@ -61,7 +61,7 @@
             </el-button>
           </el-tooltip>
 
-        </el-row>
+        </el-row> -->
         <!-- <div class="loginTip">目前登录方式支持
           <span v-if="!loginType.password"> 账号密码 </span>
           <span v-if="!loginType.gitee"> 码云 </span>

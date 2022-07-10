@@ -56,9 +56,9 @@
     </el-row>
 
     <!--文章贡献度-->
-    <el-row>
+    <!-- <el-row>
       <CalendarChart></CalendarChart>
-    </el-row>
+    </el-row> -->
 
     <!-- 分类图-->
     <el-row :gutter="32">
@@ -134,7 +134,7 @@ import PieChart from "@/components/PieChart";
 import TodoList from "@/components/TodoList";
 
 import LineChart from "@/components/LineChart";
-import CalendarChart from "@/components/CalendarChart";
+//import CalendarChart from "@/components/CalendarChart";
 import { getSystemConfig} from "@/api/systemConfig";
 import { mapMutations } from "vuex";
 
@@ -149,8 +149,8 @@ export default {
     TodoList,
 
     CountTo,
-    LineChart,
-    CalendarChart
+    LineChart
+    //CalendarChart
   },
   data() {
     return {

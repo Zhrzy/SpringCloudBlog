@@ -1,6 +1,6 @@
 <template>
     <div class="guanzhu" id="follow-us" ref="follow" v-if="isShow">
-      <h2 class="hometitle">联系我</h2>！</h2>
+      <h2 class="hometitle">联系我</h2></h2>
       <ul>
 
 

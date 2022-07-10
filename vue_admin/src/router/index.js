@@ -89,6 +89,7 @@ export const asyncRoutes = [
         }
       ]
     },
+
     {
       path: '/blog',
       component: Layout,
@@ -140,6 +141,39 @@ export const asyncRoutes = [
       ]
     },
     {
+      path: '/monitor',
+      component: Layout,
+      redirect: '/monitor/springBootAdmin',
+      name: '监控中心',
+      meta: { title: '监控中心', icon: 'table',elementICon:'el-icon-pie-chart' },
+      children: [
+        {
+          path: 'ELK',
+          name: 'ELK分布式日志',
+          component: () => import('@/view/monitor/ELK'),
+          meta: { title: 'ELK分布式日志', icon: 'table',elementICon:'el-icon-document-delete' }
+        },
+        {
+          path: 'Nacos',
+          name: '中间件控制台',
+          component: () => import('@/view/monitor/Nacos'),
+          meta: { title: '中间件控制台', icon: 'table',elementICon:'el-icon-suitcase-1' }
+        },
+        {
+          path: 'Kibana',
+          name: 'Kibana控制台',
+          component: () => import('@/view/monitor/Kibana'),
+          meta: { title: 'Kibana控制台', icon: 'table',elementICon:'el-icon-suitcase' }
+        },
+        {
+          path: 'total',
+          name: 'ES博客分析',
+          component: () => import('@/view/monitor/total'),
+          meta: { title: 'ES博客分析', icon: 'table',elementICon:'el-icon-suitcase' }
+        }
+      ]
+    },
+    {
       path: '/authority',
       component: Layout,
       redirect: '/authority/admin',
@@ -164,12 +198,6 @@ export const asyncRoutes = [
           component: () => import('@/view/authority/categoryMenu'),
           meta: { title: '菜单管理', icon: 'authority' ,elementICon:'el-icon-notebook-2' }
         }
-        // {
-        //   path: 'button',
-        //   name: '接口管理',
-        //   component: () => import('@/view/authority/api'),
-        //   meta: { title: '接口管理', icon: 'authority' }
-        // }
       ]
     },
     {
@@ -304,7 +332,8 @@ export const asyncRoutes = [
           meta: { title: '视频管理', icon: 'table',elementICon:'el-icon-video-camera-solid' }
         }
       ]
-    },
+    }
+    
 
     
 
