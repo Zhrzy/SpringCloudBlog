@@ -56,8 +56,6 @@
 
 ## 项目地址
 
-目前项目托管在 **Gitee** 和 **Github** 平台上中，欢迎大家 **Star** 和 **Fork** 支持~
-
 - Github地址：https://github.com/Zhrzy/SpringCloudBlog
 
 ## 项目目录
