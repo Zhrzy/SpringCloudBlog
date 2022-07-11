@@ -33,19 +33,18 @@
 
 ## 站点
 
-> 【演示前端】：http://81.70.251.237:9528/
+> 【项目地址】：http://zhangyublog.cn/
 >
-> 【演示后端】：http://81.70.251.237:9527/
+> 【项目管理端】：http://81.70.251.237:9527/
 
 ## 项目特点
 
 - 实现前后端分离，通过 **Json** 进行数据交互，前端再也不用关注后端技术
 - 页面交互使用 **Vue2.x**，极大的提高了开发效率。
-- 引入**Swagger** 文档支持，方便编写 **API** 接口文档。
 - 引入**RabbitMQ** 和**Kafka**消息队列，用于邮件发送、更新 **Redis** 和 **ES**
-- 引入**ElasticSearch** 和 **Solr** 作为全文检索服务，并支持可插拔配置
+- 引入**ElasticSearch** 作为全文检索服务，并支持可插拔配置
 - 引入Minio对象存储，同时支持本地文件存储
-- 引入 **RBAC** 权限管理设计，灵活的权限控制，按钮级别的细粒度权限控制
+- 引入 **RBAC** 权限管理设计，灵活的权限控制，按钮级别的细粒度权限控制，支持网关统一鉴权
 - 采用**自定义参数校验注解**，轻松实现后端参数校验
 - 采用 **AOP** + 自定义注解 + **Redis** 实现限制IP接口访问次数
 - 采用 **Nacos** 作为服务发现和配置中心，轻松完成项目的配置的维护
@@ -77,7 +76,7 @@
 
 ### 系统架构图
 
-![1657513577582.jpg](http://106.14.136.83:9090/blog/1657513577642.jpg)
+
 
 > 章鱼博客系统架构图
 
@@ -165,12 +164,10 @@
 
 **章鱼博客**参考了很多**开源项目**的**解决方案**，**开源不易，感谢分享**
 
-- [<img src="./doc/images/gitee/jetbrains.png" width="60" />](https://www.jetbrains.com/?from=mogu_blog_v2)感谢 **[jetbrains](https://www.jetbrains.com/?from=mogu_blog_v2)** 提供的开源License
 - 感谢**杨青小姐姐**的博客模板：[http://www.yangqq.com/](http://www.yangqq.com/)
 - 感谢**PanJiaChen**的Vue后台管理模板：[vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
 - Vue项目搭建参考这篇博客：[https://segmentfault.com/a/1190000009506097](https://segmentfault.com/a/1190000009506097)
 - 感谢**苞米豆**提供的 **Mybatis-plus**框架：[http://mp.baomidou.com/](http://mp.baomidou.com/)
-- 感谢**yadong.zhang**提供的第三方登录开源库：[https://gitee.com/yadong.zhang/JustAuth](https://gitee.com/yadong.zhang/JustAuth)
 - 感谢 **bihell** 的 **Dice** 博客项目：[https://github.com/bihell/Dice](https://github.com/bihell/Dice)
 - 感谢 **pppercyWang** 提供的Emoji表情评论组件：[vue-emoji-comment](https://github.com/pppercyWang/vue-emoji-comment)
 - 感谢 **若依** 提供的 **RuoYi** 项目：[https://gitee.com/y_project/RuoYi](https://gitee.com/y_project/RuoYi)
