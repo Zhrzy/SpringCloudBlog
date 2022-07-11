@@ -1,4 +1,6 @@
+<p align="center">
 # 章鱼博客
+<p/>
 <p align=center>
    章鱼博客，一个基于微服务架构的前后端分离博客系统
 </p>
