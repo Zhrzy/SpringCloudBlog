@@ -2,7 +2,7 @@
 
 <p align=center>
   <a href="http://www.zhangyublog.cn">
-    <img src="" alt="章鱼博客" style="width:200px;height:200px">
+    <img src="http://106.14.136.83:9090/blog/1656209324181.png" alt="章鱼博客" style="width:200px;height:200px">
   </a>
 </p>
 <p align=center>
