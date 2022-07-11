@@ -18,30 +18,5 @@ public class RoleMenu extends EntityBase<RoleMenu> {
         return serialVersionUID;
     }
 
-    public String getRoleUid() {
-        return roleUid;
-    }
 
-    public void setRoleUid(String roleUid) {
-        this.roleUid = roleUid;
-    }
-
-    public String getMenuUid() {
-        return menuUid;
-    }
-
-    public void setMenuUid(String menuUid) {
-        this.menuUid = menuUid;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        RoleMenu roleMenu = (RoleMenu) o;
-        return this.roleUid.equals(roleMenu.getRoleUid()) && this.menuUid.equals(roleMenu.getMenuUid());
-    }
-
-    @Override
-    public int hashCode() {
-        return (this.roleUid.hashCode()+ this.menuUid.hashCode())<<1;
-    }
 }
