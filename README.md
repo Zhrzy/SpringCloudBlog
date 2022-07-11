@@ -1,10 +1,4 @@
 # 章鱼博客
-
-<p align=center>
-  <a href="http://www.zhangyublog.cn">
-    <img src="http://106.14.136.83:9090/blog/1656209324181.png" alt="章鱼博客" style="width:200px;height:200px">
-  </a>
-</p>
 <p align=center>
    章鱼博客，一个基于微服务架构的前后端分离博客系统
 </p>
