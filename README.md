@@ -22,7 +22,6 @@
         <img src="https://gitee.com/moxi159753/mogu_blog_v2/badge/fork.svg?theme=dark" ></img>
 </a></p>
 
-
 ## 前言
 
 ## 运行配置
@@ -75,10 +74,6 @@
 ## 技术选型
 
 ### 系统架构图
-
-
-
-> 章鱼博客系统架构图
 
 ### 后端技术
 
