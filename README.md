@@ -162,7 +162,7 @@
 
 ## 致谢
 
-**章鱼博客**参考了很多**开源项目**的**解决方案**，**开源不易，感谢分享**
+**章鱼博客**参考了很多**开源项目**的**解决方案**
 
 - 感谢**杨青小姐姐**的博客模板：[http://www.yangqq.com/](http://www.yangqq.com/)
 - 感谢**PanJiaChen**的Vue后台管理模板：[vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
