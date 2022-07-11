@@ -22,7 +22,6 @@
         <img src="https://gitee.com/moxi159753/mogu_blog_v2/badge/fork.svg?theme=dark" ></img>
 </a></p>
 
-[项目介绍](#项目介绍) | [站点演示](#站点演示) | [项目特点](#项目特点) | [技术架构](#技术选型) | [项目目录](#项目目录) | [项目文档](#项目文档)  | [快速开始](#快速开始) | [视频教程](#视频教程)| [项目截图](#移动端截图) | [更新记录](https://gitee.com/moxi159753/mogu_blog_v2/releases) | [笔记仓库](https://gitee.com/moxi159753/LearningNotes)
 
 ## 前言
 
@@ -52,8 +51,8 @@
 - 采用 **Nacos** 作为服务发现和配置中心，轻松完成项目的配置的维护
 - 采用 **Sentinel** 流量控制框架，通过配置再也不怕网站被爆破
 - 支持**Markdown** 编辑器
-- 采用 **ElasticStack**【**ElasticSearch** + **Beats** + **Kibana** + **Logstash**】[搭建章鱼博客日志收集](http://moguit.cn/info/436)
-- 采用 **Docker Compose** 完成容器编排，**Portainer** 实现容器可视化，支持[一键部署线上环境](http://www.moguit.cn/info/565)
+- 采用 **ElasticStack**【**ElasticSearch** + **Beats** + **Kibana** + **Logstash**】搭建章鱼博客日志收集
+- 采用 **Docker Compose** 完成容器编排，**Portainer** 实现容器可视化，支持一键部署线上环境
 
 ## 项目地址
 
