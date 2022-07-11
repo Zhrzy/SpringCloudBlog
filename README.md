@@ -99,16 +99,11 @@
 |     Redis     |        分布式缓存        |                                  https://redis.io/                                  |
 |     Docker     |        容器化部署        |                   [ https://www.docker.com](https://www.docker.com/)                   |
 |     Druid     |       数据库连接池       |          [ https://github.com/alibaba/druid](https://github.com/alibaba/druid)          |
-|                |                          |                                                                                      |
 |      JWT      |        JWT登录支持        |                             https://github.com/jwtk/jjwt                             |
 |     SLF4J     |         日志框架         |                                http://www.slf4j.org/                                |
 |     Lombok     |     简化对象封装工具     |    [ https://github.com/rzwitserloot/lombok](https://github.com/rzwitserloot/lombok)    |
 |     Nginx     |  HTTP和反向代理web服务器  |                                  http://nginx.org/                                  |
-|                |                          |                                                                                      |
 |     Hutool     |      Java工具包类库      |                              https://hutool.cn/docs/#/                              |
-|                |                          |                                                                                      |
-|                |                          |                                                                                      |
-|                |                          |                                                                                      |
 | Flexmark-java |     Markdown转换Html     |                        https://github.com/vsch/flexmark-java                        |
 |   Ip2region   |     离线IP地址定位库     |                      https://github.com/lionsoul2014/ip2region                      |
 |     Minio     |     本地对象存储服务     |                                   https://min.io/                                   |
@@ -122,21 +117,15 @@
 |        Vue.js        |                前端框架                |                       https://vuejs.org/                       |
 |      Vue-router      |                路由框架                |                   https://router.vuejs.org/                   |
 |         Vuex         |            全局状态管理框架            |                    https://vuex.vuejs.org/                    |
-|                      |                                        |                                                                |
 |        Element        |               前端ui框架               |      [ https://element.eleme.io](https://element.eleme.io/)      |
 |         Axios         |              前端HTTP框架              | [ https://github.com/axios/axios](https://github.com/axios/axios) |
 |        Echarts        |                图表框架                |                       www.echartsjs.com                       |
-|                      |                                        |                                                                |
-|                      |                                        |                                                                |
 |        Vditor        |             Markdown编辑器             |              https://github.com/Vanessa219/vditor              |
 |      vue-cropper      |              图片裁剪组件              |            https://github.com/xyxiao001/vue-cropper            |
 | vue-image-crop-upload |           vue图片剪裁上传组件           |       https://github.com/dai-siki/vue-image-crop-upload       |
 |   vue-emoji-comment   |          Vue Emoji表情评论组件          |        https://github.com/pppercyWang/vue-emoji-comment        |
-|                      |                                        |                                                                |
 |      SortableJS      |       功能强大的JavaScript 拖拽库       |                   http://www.sortablejs.com/                   |
 |   vue-side-catalog   |               目录导航栏               |         https://github.com/yaowei9363/vue-side-catalog         |
-|        uniapp        |            移动端跨平台语言            |                   https://uniapp.dcloud.io/                   |
-|        colorUi        |         专注视觉的小程序组件库         |              https://github.com/weilanwl/ColorUI              |
 |       showdown       | 用Javascript编写的Markdown 到Html转换器 |             https://github.com/showdownjs/showdown             |
 |       turndown       | 用JavaScript编写的HTML到Markdown转换器 |            https://github.com/domchristie/turndown            |
 
