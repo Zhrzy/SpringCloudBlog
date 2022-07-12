@@ -2,9 +2,7 @@
 
 章鱼博客，一个基于微服务架构的前后端分离博客系统
 
-```
-     [![](https://img.shields.io/hexpm/l/plug.svg) ![](https://img.shields.io/badge/JDK-1.8+-green.svg) ![](https://img.shields.io/badge/nodejs-14.x-green) ![](https://img.shields.io/badge/springboot-2.2.2.RELEASE-green) ![](https://img.shields.io/badge/SpringCloud-Hoxton.RELEASE-brightgreen) ![](https://img.shields.io/badge/vue-2.5.17-green) ![](https://img.shields.io/badge/swagger-3.0.0-brightgreen) ![](https://img.shields.io/badge/mybatis--plus-3.1.2-green) ](https://github.com/Zhrzy/SpringCloudBlog)
-```
+
 
 前言
 ----
