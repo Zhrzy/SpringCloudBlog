@@ -16,4 +16,6 @@
         uid, roleName, status, createTime, updateTime
     </sql>
 
+
+
 </mapper>

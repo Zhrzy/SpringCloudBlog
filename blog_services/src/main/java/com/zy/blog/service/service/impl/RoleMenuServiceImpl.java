@@ -3,14 +3,18 @@ package com.zy.blog.service.service.impl;
 import cn.hutool.json.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.zy.blog.base.ServiceImplBase;
+import com.zy.blog.entity.CategoryMenu;
+import com.zy.blog.entity.Menu;
 import com.zy.blog.entity.Role;
 import com.zy.blog.entity.RoleMenu;
 import com.zy.blog.service.mapper.RoleMapper;
 import com.zy.blog.service.mapper.RoleMenuMapper;
 import com.zy.blog.service.service.AdminService;
+import com.zy.blog.service.service.CategoryMenuService;
 import com.zy.blog.service.service.RoleMenuService;
 import com.zy.blog.service.service.RoleService;
 import com.zy.blog.utils.constant.EStatus;
@@ -27,9 +31,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -38,34 +40,68 @@ public class RoleMenuServiceImpl extends ServiceImplBase<RoleMenuMapper, RoleMen
 
     @Resource
     RoleMenuService roleMenuService;
+    @Resource
+    CategoryMenuService categoryMenuService;
 
+    @Resource
+    RoleMenuMapper roleMenuMapper;
     @Transactional
     @Override
     public String addRoleMenu(String roleId ,String menuUids) {
         menuUids = menuUids.substring(1,menuUids.length()-1);
-        menuUids.replaceAll("\"","");
+        menuUids =  menuUids.replaceAll("\"","");
         String[] uids = StringUtils.split(menuUids,",");
         List<RoleMenu> list = new ArrayList<>();
-        for(String uid :uids){
+        //二级菜单
+        QueryWrapper<CategoryMenu> queryWrapper = new QueryWrapper<>();
+        queryWrapper.in(SQLConf.UID,Arrays.asList(uids));
+        queryWrapper.eq(SQLConf.STATUS,1);
+        queryWrapper.isNotNull("parent_uid");
+        queryWrapper.select("DISTINCT parent_uid");
+
+        List<CategoryMenu>  menus = categoryMenuService.list(queryWrapper);
+        List<String> levelSecondMenuIds = new ArrayList<>();
+        for(CategoryMenu menu:menus){
+            levelSecondMenuIds.add(menu.getParentUid());
+        }
+        //一级菜单
+        QueryWrapper<CategoryMenu> queryWrapperOne = new QueryWrapper<>();
+        queryWrapperOne.in(SQLConf.UID,levelSecondMenuIds);
+        queryWrapperOne.eq(SQLConf.STATUS,1);
+        queryWrapperOne.isNotNull("parent_uid");
+        queryWrapperOne.select("DISTINCT parent_uid");
+        List<CategoryMenu>  menuLevelOne = categoryMenuService.list(queryWrapperOne);
+        List<String> levelOneMenuIds =new ArrayList<>();
+        for(CategoryMenu menu:menuLevelOne){
+            levelOneMenuIds.add(menu.getParentUid());
+        }
+        Set<String> setMenuIds = new HashSet<String>(Arrays.asList(uids));
+        setMenuIds.addAll(levelSecondMenuIds);
+        setMenuIds.addAll(levelOneMenuIds);
+        setMenuIds.stream().forEach(menuId -> {
             RoleMenu roleMenu =new RoleMenu();
             roleMenu.setRoleUid(roleId);
-            roleMenu.setMenuUid(uid);
+            roleMenu.setMenuUid(menuId);
             roleMenu.setStatus(EStatus.ENABLE);
-            roleMenu.insert();
-        }
+            list.add(roleMenu);
+        });
+        roleMenuService.saveBatch(list,20);
         return ResultUtil.successWithMessage("插入角色菜单成功");
     }
 
     @Transactional
     @Override
     public String deleteRoleMenu(String roleIds) {
-        QueryWrapper<RoleMenu> queryWrapper = new QueryWrapper<>();
+        QueryWrapper<RoleMenu> delete = new QueryWrapper<>();
+        delete.eq(SQLConf.ROLE_UID, roleIds);
+        roleMenuMapper.delete(delete);
+        /*QueryWrapper<RoleMenu> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq(SQLConf.ROLE_UID,roleIds);
         List<RoleMenu> roleMenus = roleMenuService.list(queryWrapper);
         roleMenus.stream().forEach(roleMenu->{
             roleMenu.setStatus(EStatus.DISABLED);
             roleMenuService.updateById(roleMenu);
-        });
+        });*/
         /*roleMenuService.updateBatchById(roleMenus);*/
         return ResultUtil.successWithMessage(MessageConf.DELETE_SUCCESS);
     }
@@ -73,44 +109,55 @@ public class RoleMenuServiceImpl extends ServiceImplBase<RoleMenuMapper, RoleMen
     @Transactional
     @Override
     public String updateRoleMenu(RoleView roleView) {
+        //获取到全部的菜单id
         String roleUid = roleView.getUid();
-        String menuUids = roleView.getCategoryMenuUids();
-        menuUids = menuUids.substring(2,menuUids.length()-2).replaceAll("\"","");
-        QueryWrapper<RoleMenu> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq(SQLConf.ROLE_UID, roleUid);
-        queryWrapper.eq(SQLConf.STATUS, EStatus.ENABLE);
-        //老的
-        List<RoleMenu> listOld = roleMenuService.list(queryWrapper);
-        List<String> uidsOld = listOld.stream().map(s->s.getMenuUid()).collect(Collectors.toList());
-        //新的
-        String[] uids = StringUtils.split(menuUids,",");
-        List<String> uidsNew = Arrays.stream(uids).collect(Collectors.toList());
-        //获取需要删除的菜单
-        List<String> dump = new ArrayList<>(uidsOld);
-        dump.removeAll(uidsNew);
-        if(dump.size()>0){
-            QueryWrapper<RoleMenu> del = new QueryWrapper<>();
-            del.eq(SQLConf.ROLE_UID,roleUid);
-            del.in(SQLConf.MENU_UID,dump);
-            List<RoleMenu> roleMenus = roleMenuService.list(del);
-            if (roleMenus.size()>0)
-                roleMenus.stream().forEach(roleMenu->{
-                    roleMenu.setStatus(EStatus.DISABLED);
-                    roleMenuService.updateById(roleMenu);
-                });
-        }
-
-        //获取需要新增的
-        List<String> addNeed = new ArrayList<>(uidsNew);
-        addNeed.removeAll(listOld);
-        for(String uid :addNeed){
+        String uids = roleView.getCategoryMenuUids();
+        uids = uids.substring(2,uids.length()-2).replaceAll("\"","");
+        String[] menuUidsArray = StringUtils.split(uids,",");
+        //将老的删除
+        /*UpdateWrapper<RoleMenu> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.eq(SQLConf.ROLE_UID, roleUid);
+        //updateWrapper.set(SQLConf.STATUS, 0);
+        roleMenuService.update(updateWrapper);*/
+        QueryWrapper<RoleMenu> delete = new QueryWrapper<>();
+        delete.eq(SQLConf.ROLE_UID, roleUid);
+        roleMenuMapper.delete(delete);
+        //重建所有的菜单，放入
+        //二级菜单
+        List<String> listUid = Arrays.asList(menuUidsArray);
+        QueryWrapper<CategoryMenu> queryWrapper = new QueryWrapper<>();
+        queryWrapper.in(SQLConf.UID,listUid);
+        queryWrapper.eq(SQLConf.STATUS,1);
+        queryWrapper.isNotNull("parent_uid");
+        queryWrapper.select("DISTINCT parent_uid");
+        List<CategoryMenu>  menus = categoryMenuService.list(queryWrapper);
+        List<String> levelSecondMenuIds = menus.stream()
+                .filter(a->a.getParentUid()!=null&&!"".equals(a.getParentUid()))
+                .map(s->s.getParentUid()).collect(Collectors.toList());
+        //一级菜单
+        QueryWrapper<CategoryMenu> queryWrapperOne = new QueryWrapper<>();
+        queryWrapperOne.in(SQLConf.UID,levelSecondMenuIds);
+        queryWrapperOne.eq(SQLConf.STATUS,1);
+        queryWrapperOne.isNotNull("parent_uid");
+        queryWrapperOne.select("DISTINCT parent_uid");
+        List<CategoryMenu>  menuLevelOne = categoryMenuService.list(queryWrapperOne);
+        List<String> levelOneMenuIds = menuLevelOne.stream()
+                .filter(a->a.getParentUid()!=null&&!"".equals(a.getParentUid()))
+                .map(s->s.getParentUid()).collect(Collectors.toList());
+        //报文中的 + 二级 +一级菜单  去重处理
+        Set<String> setMenuIds = new HashSet<String>(listUid);
+        setMenuIds.addAll(levelSecondMenuIds);
+        setMenuIds.addAll(levelOneMenuIds);
+        //构建
+        List<RoleMenu> list = new ArrayList<>();
+        setMenuIds.parallelStream().forEach(menuId -> {
             RoleMenu roleMenu =new RoleMenu();
-            roleMenu.setRoleUid(roleUid);
-            roleMenu.setMenuUid(uid);
+            roleMenu.setRoleUid(roleView.getUid());
+            roleMenu.setMenuUid(menuId);
             roleMenu.setStatus(EStatus.ENABLE);
-            roleMenu.insert();
-            System.out.println("");
-        }
+            list.add(roleMenu);
+        });
+        roleMenuService.saveBatch(list);
         return ResultUtil.successWithMessage(MessageConf.UPDATE_SUCCESS);
     }
 

@@ -6,6 +6,8 @@ import com.zy.blog.entity.Role;
 import com.zy.blog.entity.RoleMenu;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * 角色表 Mapper 接口
  *
@@ -14,5 +16,7 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface RoleMenuMapper extends SuperMapper<RoleMenu> {
+
+
 
 }
