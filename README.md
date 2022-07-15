@@ -3,23 +3,15 @@
 章鱼博客，一个基于微服务架构的前后端分离博客系统
 
 
-
-前言
-----
-
-运行配置
---------
-
-章鱼博客使用了一些监控的 **SpringCloud** 组件，但是并不一定都需要部署，必须启动的服务包含
-
-`nacos`，`nginx`，`rabbitmq`，`mysql`， `redis`，`blog-admin`，`blog-gateway`，`blog-mse`，`blog-picture`， `blog-web`, `blog-searc`, `blog-oauth`
-
 站点
 ----
 
 > 【项目地址】：http://zhangyublog.cn/
 >
 > 【项目管理端】：http://81.70.251.237:9527/
+### 系统架构图
+
+![1657635961925.png](http://106.14.136.83:9090/blog/1657635961961.png)
 
 项目特点
 --------
@@ -62,6 +54,15 @@
 技术选型
 --------
 
+前言
+----
+
+运行配置
+--------
+
+章鱼博客使用了一些监控的 **SpringCloud** 组件，但是并不一定都需要部署，必须启动的服务包含
+
+`nacos`，`nginx`，`rabbitmq`，`mysql`， `redis`，`blog-admin`，`blog-gateway`，`blog-mse`，`blog-picture`， `blog-web`, `blog-searc`, `blog-oauth`
 ### 系统架构图
 
 ![1657635961925.png](http://106.14.136.83:9090/blog/1657635961961.png)
