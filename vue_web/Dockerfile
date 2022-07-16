@@ -1,6 +1,6 @@
 FROM nginx
-ADD ./dist/ /usr/share/nginx/html
-RUN sed -i 's/\r$//' /usr/share/nginx/html/env.sh
-RUN chmod +x /usr/share/nginx/html/env.sh
-ENTRYPOINT ["/usr/share/nginx/html/env.sh"]
-CMD ["nginx", "-g", "daemon off;"]
+# 将dist文件中的内容复制到 /usr/share/nginx/html/ 这个目录下面
+COPY dist/  /usr/share/nginx/html/
+#COPY dist/  /usr/share/nginx/html/
+#用本地的 default.conf 配置来替换nginx镜像里的默认配置
+COPY default.conf /etc/nginx/conf.d/default.conf
