@@ -31,6 +31,8 @@ public class RequestAuthenticationEntryPoint implements ServerAuthenticationEntr
                 .flatMap(response -> {
                     response.setStatusCode(HttpStatus.OK);
                     response.getHeaders().set(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
+                    response.getHeaders().set("Access-Control-Allow-Origin", "*");
+                    response.getHeaders().set("Cache-Control", "no-cache");
                     String body= JSONUtil.toJsonStr(new ResultMsg(ResultCode.TOKEN_INVALID.getStatus(),ResultCode.TOKEN_INVALID.getMessage(),null));
                     DataBuffer buffer = response.bufferFactory().wrap(body.getBytes(Charset.forName("UTF-8")));
                     return response
