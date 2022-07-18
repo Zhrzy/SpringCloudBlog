@@ -2,6 +2,7 @@ package com.zy.blog.gateway.config;
 
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.json.JSONUtil;
+import com.zy.blog.gateway.exception.RequestAccessDeniedHandler;
 import com.zy.blog.utils.util.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -38,11 +39,15 @@ public class ResourceServerConfig {
     @Autowired
     private WhiteListConfig whiteListConfig;
 
+
     @Autowired
     private ServerAuthenticationEntryPoint serverAuthenticationEntryPoint;
 
+    /**
+     * 权限不足的异常处理
+     */
     @Autowired
-    private ServerAccessDeniedHandler serverAccessDeniedHandler;
+    private RequestAccessDeniedHandler requestAccessDeniedHandler;
 
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
@@ -55,7 +60,7 @@ public class ResourceServerConfig {
                 .anyExchange().access(authorizationManager)
                 .and()
                 .exceptionHandling()
-                .accessDeniedHandler(serverAccessDeniedHandler) // 处理未授权
+                .accessDeniedHandler(requestAccessDeniedHandler) // 处理未授权
                 .authenticationEntryPoint(serverAuthenticationEntryPoint) //处理未认证
                 .and().csrf().disable();
         return http.build();
@@ -95,7 +100,7 @@ public class ResourceServerConfig {
     @Bean
     public Converter<Jwt, ? extends Mono<? extends AbstractAuthenticationToken>> jwtAuthenticationConverter() {
         JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
-        jwtGrantedAuthoritiesConverter.setAuthorityPrefix("ROLE");
+        jwtGrantedAuthoritiesConverter.setAuthorityPrefix("role_");
         jwtGrantedAuthoritiesConverter.setAuthoritiesClaimName("authorities");
         JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
         jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(jwtGrantedAuthoritiesConverter);
