@@ -16,7 +16,7 @@ public enum ResultCode {
 
     TOKEN_INVALID("1004","token失效！"),
 
-    NO_PERMISSION("1005","无权限访问！"),
+    NO_PERMISSION("1005","对不起，您没有操作权限！"),
 
     UNAUTHORIZED("401", "系统错误");
     private String status;

@@ -21,3 +21,10 @@ spring:
         namespace: ${spring.profiles.active}
       username: nacos
       password: nacos
+
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource           # 当前数据源操作类型
+    driver-class-name: org.gjt.mm.mysql.Driver         # mysql驱动包
+    url: jdbc:mysql://rm-uf6ea0i13i88ck5ecyo.mysql.rds.aliyuncs.com:3306/mogu_blog?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&useSSL=false&serverTimezone=GMT%2B8&autoReconnect=true&failOverReadOnly=false
+    username: zy
+    password: zhangyong123##
