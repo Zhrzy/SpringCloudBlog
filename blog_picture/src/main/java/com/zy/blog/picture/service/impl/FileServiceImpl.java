@@ -66,9 +66,6 @@ public class FileServiceImpl extends ServiceImplBase<FileMapper, File> implement
                 for (int i = 0; i < picData.size(); i++) {
                     Map<String, Object> item = new HashMap<>();
                     item.put(SysConf.UID, picData.get(i).get(SysConf.UID));
-//                    if (EFilePriority.QI_NIU.equals(systemConfig.getPicturePriority())) {
-//                        item.put(SysConf.URL, qiNiuPictureBaseUrl + picData.get(i).get(SysConf.QI_NIU_URL));
-//                    } else
                     if (EFilePriority.MINIO.equals(systemConfig.getPicturePriority())) {
                         item.put(SysConf.URL, minioPictureBaseUrl + picData.get(i).get(SysConf.MINIO_URL));
                     } else {
