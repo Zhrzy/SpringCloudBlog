@@ -2,7 +2,7 @@
 
 章鱼博客，一个基于微服务架构的前后端分离博客系统
 
-
+ 
 
 站点
 ----
@@ -91,9 +91,9 @@
 |   Ip2region   |     离线IP地址定位库     |                      https://github.com/lionsoul2014/ip2region                      |
 |     Minio     |     本地对象存储服务     |                                   https://min.io/                                   |
 | Docker Compose |      Docker容器编排      |                          https://docs.docker.com/compose/                          |
-|   Portainer   |     Docker可视化管理     |                       https://github.com/portainer/portainer                       |
-
-### 前端技术
+|   Portainers   |     Docker可视化管理     |                       https://github.com/portainer/portainer                       |
+ 
+### 前端技术 
 
 |         技术         |                  说明                  |                             官网                             |
 | :-------------------: | :-------------------------------------: | :-----------------------------------------------------------: |
