@@ -15,4 +15,5 @@ public final class SQLConf extends BaseSQLConf {
     public final static String PROJECT_NAME = "project_name";
     public final static String SORT_NAME = "sort_name";
     public final static String ADMIN_UID = "admin_uid";
+    
 }
