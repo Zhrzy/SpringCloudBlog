@@ -51,7 +51,7 @@ import java.util.stream.Collectors;
 @Component
 @Slf4j
 public class AuthorizationManager implements ReactiveAuthorizationManager<AuthorizationContext> {
-
+    /*测试add*/
     @Autowired
     private RedisUtil redisUtil;
 

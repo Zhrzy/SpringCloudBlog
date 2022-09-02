@@ -40,7 +40,7 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
     /*测试add*/
     @Autowired
     private RedisTemplate redisTemplate;
-
+    /*测试add*/
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         String token = exchange.getRequest().getHeaders().getFirst(AuthConstants.JWT_AUTHORIZATION);
