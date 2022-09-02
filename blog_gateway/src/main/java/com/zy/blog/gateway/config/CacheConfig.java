@@ -17,7 +17,7 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 /**
  * @author: 小章鱼
  * @description:
- * @date: 2021/8/12 22:21
+ * @date: 2021/8/12 22:25
  **/
 @Configuration
 public class CacheConfig extends CachingConfigurerSupport {
