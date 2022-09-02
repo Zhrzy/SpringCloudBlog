@@ -37,6 +37,7 @@ import java.util.Map;
 @Component
 public class AuthGlobalFilter implements GlobalFilter, Ordered {
 
+    /*测试add 分支提交*/
     /*测试add featureUpdate1*/
     @Autowired
     private RedisTemplate redisTemplate;
